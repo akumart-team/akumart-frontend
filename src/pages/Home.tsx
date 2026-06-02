@@ -21,7 +21,7 @@ interface MobileStepRowProps {
 }
 
 const StepCard = ({ iconSrc, text }: StepProps) => (
-  <div className="flex flex-col items-center gap-3 bg-white border border-gray-200 rounded-3xl p-6 shadow-sm min-w-[180px]">
+  <div className="flex flex-col items-center gap-3 bg-white border border-gray-200 rounded-3xl p-6 shadow-sm min-w-45">
     <img src={iconSrc} alt={text} className="w-12 h-12 object-contain" />
     <p className="text-[#111827] text-sm md:text-base font-medium text-center">
       {text}
@@ -196,13 +196,13 @@ export const Home = () => {
           <div className="hidden md:flex flex-col gap-16  mx-auto">
             {/* Row 1: For Sellers (Left to Right) */}
             <div className="flex items-center justify-start gap-8 w-full">
-              <div className="flex items-center gap-6 min-w-[200px]">
+              <div className="flex items-center gap-6 min-w-50">
                 <span className="text-[#111827] text-2xl font-bold">
                   For <span className="text-[#A3E635]">Sellers</span>
                 </span>
-                <div className="flex-grow flex items-center justify-end">
-                  <span className="h-[1px] w-24 bg-gray-400 relative">
-                    <span className="absolute right-0 -top-[4px] border-solid border-r-gray-400 border-b-gray-400 border-r-[5px] border-b-[5px] p-[3px] transform rotate-[315deg]" />
+                <div className="grow flex items-center justify-end">
+                  <span className="h-px w-24 bg-gray-400 relative">
+                    <span className="absolute right-0 -top-1 border-solid border-r-gray-400 border-b-gray-400 border-r-[5px] border-b-[5px] p-0.75 transform rotate-315" />
                   </span>
                 </div>
               </div>
@@ -230,10 +230,10 @@ export const Home = () => {
                 ))}
               </div>
 
-              <div className="flex items-center gap-6 min-w-[200px]">
-                <div className="flex-grow flex items-center justify-start">
-                  <span className="h-[1px] w-24 bg-gray-400 relative">
-                    <span className="absolute left-0 -top-[4px] border-solid border-l-gray-400 border-b-gray-400 border-l-[5px] border-b-[5px] p-[3px] transform rotate-[45deg]" />
+              <div className="flex items-center gap-6 min-w-50">
+                <div className="grow flex items-center justify-start">
+                  <span className="h-px w-24 bg-gray-400 relative">
+                    <span className="absolute left-0 -top-1 border-solid border-l-gray-400 border-b-gray-400 border-l-[5px] border-b-[5px] p-0.75 transform rotate-45" />
                   </span>
                 </div>
                 <span className="text-[#111827] text-2xl font-bold whitespace-nowrap">
