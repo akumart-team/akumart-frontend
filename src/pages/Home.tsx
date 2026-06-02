@@ -5,6 +5,16 @@ import List from "../assets/icons/list.svg";
 import Paid from "../assets/icons/paid.svg";
 import People from "../assets/icons/people.png";
 
+import Plastic from "../assets/imgs/plastics.png"
+import Glass from "../assets/imgs/glass.png"
+import Metal from "../assets/imgs/metals.png"
+import Wood from "../assets/imgs/wood.png"
+import Waste from "../assets/imgs/e-waste.png"
+import Paper from "../assets/imgs/paper.png"
+
+
+
+
 interface StatCardProps {
   number: string;
   label: string;
@@ -20,8 +30,14 @@ interface MobileStepRowProps {
   text: string;
 }
 
+interface Category {
+  id: number;
+  name: string;
+  image: string;
+}
+
 const StepCard = ({ iconSrc, text }: StepProps) => (
-  <div className="flex flex-col items-center gap-3 bg-white border border-gray-200 rounded-3xl p-6 shadow-sm min-w-45">
+  <div className="flex flex-col items-center gap-3 bg-white border border-gray-200 rounded-3xl p-6 shadow-sm min-w-[180px]">
     <img src={iconSrc} alt={text} className="w-12 h-12 object-contain" />
     <p className="text-[#111827] text-sm md:text-base font-medium text-center">
       {text}
@@ -37,6 +53,15 @@ const MobileStepRow = ({ number, text }: MobileStepRowProps) => (
     <p className="text-[#111827] text-sm font-medium">{text}</p>
   </div>
 );
+
+const categories: Category[] = [
+  { id: 1, name: 'Plastic', image: Plastic },
+  { id: 2, name: 'Metal', image: Metal },
+  { id: 3, name: 'Paper', image: Paper },
+  { id: 4, name: 'Wood', image: Wood },
+  { id: 5, name: 'E-Waste', image: Waste },
+  { id: 6, name: 'Glass', image: Glass },
+];
 
 export const Home = () => {
   // Statistics Data
@@ -279,6 +304,54 @@ export const Home = () => {
           </div>
         </div>
       </section>
+
+      {/* Waste */}
+      <section className="w-full py-12 px-4 md:px-8 bg-white text-center select-none">
+      {/* Header Section */}
+      <div className="max-w-2xl mx-auto mb-8">
+        <h2 className="text-2xl md:text-3xl font-bold text-[#1E293B] mb-2">
+          Explore <span className="text-[#84CC16]">Waste</span> Categories
+        </h2>
+        <p className="text-sm md:text-base text-[#64748B]">
+          Browse recyclable materials tailored to your business needs
+        </p>
+        {/* Blue decorative line from Figma */}
+        <div className="w-8 h-1 bg-[#38BDF8] mx-auto mt-4 rounded-full"></div>
+      </div>
+
+      {/* Categories Container */}
+      <div className="max-w-6xl mx-auto">
+        {/* Mobile View: Horizontal scrollable with 2 rows (grid-rows-2 grid-flow-col)
+          Desktop View: Standard 4-column responsive grid
+        */}
+        <div className="flex overflow-x-auto md:grid md:grid-cols-4 gap-4 pb-4 md:pb-0 scrollbar-none snap-x snap-mandatory grid-rows-2 grid-flow-col md:grid-flow-row">
+          {categories.map((category) => (
+            <div
+              key={category.id}
+              className="relative shrink-0 w-[75vw] sm:w-[45vw] md:w-auto h-48 md:h-56 rounded-2xl overflow-hidden group snap-center border border-gray-100 shadow-sm"
+            >
+              {/* Image */}
+              <img
+                src={category.image}
+                alt={`${category.name} category`}
+                className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+              />
+
+              {/* Tint Overlay & Text */}
+              <div className="absolute inset-0 bg-black/20 flex items-end justify-center pb-4">
+                <span className="text-white font-semibold text-lg md:text-xl tracking-wide drop-shadow-sm">
+                  {category.name}
+                </span>
+              </div>
+            </div>
+          ))}
+
+          {/* Placeholders for the remaining 2 empty blocks in the Figma grid layout on desktop */}
+          <div className="hidden md:block h-56 border border-dashed border-gray-200 rounded-2xl"></div>
+          <div className="hidden md:block h-56 border border-dashed border-gray-200 rounded-2xl"></div>
+        </div>
+      </div>
+    </section>
     </div>
   );
 };
