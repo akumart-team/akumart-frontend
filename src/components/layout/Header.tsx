@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
+import Logo from "../../assets/imgs/logo.png";
 
 
 export const Header = () => {
@@ -34,15 +35,7 @@ export const Header = () => {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2 shrink-0 ">
-            <div className="w-9 h-9 bg-[#1a472a] rounded-lg flex items-center text-[30px] justify-center">
-              <span className="text-white font-bold  leading-none">A</span>
-            </div>
-            <div className="flex flex-col leading-none">
-              <span className="text-[#111827)] font-bold text-[30px] tracking-tight" sm:px-6 lg:px-12 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
-                Aku<span className="text-[#A3E635]">Mart</span>
-              </span>
-              <span className="text-gray-400 text-[9px] tracking-wide">Waste Today. Resource Tomorrow.</span>
-            </div>
+          <img src={Logo} alt="logo" />
           </Link>
 
           {/* Desktop Nav */}

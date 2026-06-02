@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import Hero from "../assets/imgs/home1.png";
 
+
 import List from "../assets/icons/list.svg";
 import Paid from "../assets/icons/paid.svg";
 import People from "../assets/icons/people.png";
@@ -660,7 +661,7 @@ export const Home = () => {
       </section>
 
       {/* Testimonial */}
-     <section className="relative w-full py-20 px-4 md:px-12 lg:px-24 overflow-hidden min-h-[600px] flex items-center justify-center">
+     <section className="relative w-full py-20 px-4 md:px-12 lg:px-24 overflow-hidden min-h-150 flex items-center justify-center">
       {/* 1. FIXED BACKGROUND: Using an absolute div with true background opacity so it's muted, NOT shouty */}
       <div 
         className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-[0.15]" 
@@ -692,7 +693,7 @@ export const Home = () => {
             {testimonialsData.map((item) => (
               <div
                 key={item.id}
-                className="bg-white rounded-2xl p-6 border border-gray-100 shadow-md lg:shadow-sm flex flex-col justify-between snap-center min-h-[220px] lg:min-h-[250px] w-full"
+                className="bg-white rounded-2xl p-6 border border-gray-100 shadow-md lg:shadow-sm flex flex-col justify-between snap-center min-h-55 lg:min-h-62.5 w-full"
               >
                 {/* Review Text */}
                 <p className="text-[#334155] text-sm leading-relaxed mb-6 font-normal">
