@@ -540,10 +540,10 @@ export const Home = () => {
           {features.map((feature) => (
             <div
               key={feature.id}
-              className="bg-white rounded-2xl p-8 flex flex-col items-center justify-between min-h-[280px] shadow-sm transition-transform duration-200 hover:-translate-y-1"
+              className="bg-white rounded-2xl p-8 flex flex-col items-center justify-between min-h-70 shadow-sm transition-transform duration-200 hover:-translate-y-1"
             >
               {/* Centered Icon Container */}
-              <div className="w-[50px] h-[50px] flex items-center justify-center mb-6">
+              <div className="w-12.5 h-12.5 flex items-center justify-center mb-6">
                 {feature.icon}
               </div>
 
@@ -552,7 +552,7 @@ export const Home = () => {
                 <h3 className="text-[#0F172A] font-bold text-lg md:text-xl mb-4">
                   {feature.title}
                 </h3>
-                <p className="text-[#475569] text-sm leading-relaxed max-w-[240px] mx-auto">
+                <p className="text-[#475569] text-sm leading-relaxed max-w-60 mx-auto">
                   {feature.description}
                 </p>
               </div>
@@ -724,7 +724,7 @@ export const Home = () => {
       </div>
     </section>
     {/* last section */}
-    <section className="w-full bg-[#052316] py-16 px-6 md:px-16 lg:px-24 flex items-center justify-center overflow-hidden min-h-[540px] md:h-[583px]">
+    <section className="w-full bg-[#052316] py-16 px-6 md:px-16 lg:px-24 flex items-center justify-center overflow-hidden min-h-135 md:h-145.75">
       <div className="max-w-5xl mx-auto w-full flex flex-col-reverse lg:flex-row items-center justify-between gap-10 lg:gap-16">
         
         {/* Left Side: Content Box (Appears underneath image on mobile) */}
