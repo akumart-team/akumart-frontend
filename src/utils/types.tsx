@@ -1,8 +1,6 @@
-// ============================================================
-//  AKUMART — Global TypeScript Types
-// ============================================================
 
-// ─── USER & AUTH ─────────────────────────────────────────────────────────────
+
+// USER & AUTH 
 
 export type UserRole = "seller" | "buyer" | "admin";
 
@@ -53,7 +51,7 @@ export interface AuthState {
   isAuthenticated: boolean;
 }
 
-// ─── LISTINGS ────────────────────────────────────────────────────────────────
+//  LISTINGS 
 
 export type LogisticsPreference = "self" | "akumart";
 
@@ -84,7 +82,7 @@ export interface Listing {
   trustSummary?: string;
 }
 
-// ─── ORDERS ──────────────────────────────────────────────────────────────────
+//  ORDERS 
 
 export type OrderStatus =
   | "pending"
@@ -124,7 +122,7 @@ export type PaymentMethod =
   | "bank_transfer"
   | "crypto";
 
-// ─── REVIEWS ─────────────────────────────────────────────────────────────────
+//  REVIEWS 
 
 export interface Review {
   id: string;
@@ -137,7 +135,7 @@ export interface Review {
   createdAt: string;
 }
 
-// ─── SELLER TRACTION ─────────────────────────────────────────────────────────
+// SELLER TRACTION 
 
 export interface SellerTraction {
   sellerId: string;
@@ -149,7 +147,7 @@ export interface SellerTraction {
   reviewCount: number;
 }
 
-// ─── NOTIFICATIONS ───────────────────────────────────────────────────────────
+// NOTIFICATIONS 
 
 export type NotificationType =
   | "new_listing_match"
@@ -174,7 +172,7 @@ export interface AppNotification {
   linkTo?: string;
 }
 
-// ─── FYP ─────────────────────────────────────────────────────────────────────
+//  FYP 
 
 export type FYPContentType = "article" | "seller_post" | "news" | "tip";
 
@@ -191,7 +189,7 @@ export interface FYPPost {
   imageUrl?: string;
 }
 
-// ─── API RESPONSES ───────────────────────────────────────────────────────────
+//API RESPONSES 
 
 export interface ApiResponse<T> {
   success: boolean;
@@ -208,7 +206,7 @@ export interface PaginatedResponse<T> {
   totalPages: number;
 }
 
-// ─── ZUSTAND UI STATE ────────────────────────────────────────────────────────
+// ZUSTAND UI STATE 
 
 export interface UINotification {
   id: string;

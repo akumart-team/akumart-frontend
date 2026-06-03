@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import Logo from "../../assets/imgs/logo.png";
 
 export const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -26,25 +27,12 @@ export const Footer = () => {
       
 
       {/* Links Section */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div className=" mx-auto px-4 sm:px-6 lg:px-12 py-12">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
           {/* Brand */}
           <div className="col-span-1">
             <Link to="/" className="flex items-center gap-2 mb-4">
-              <div className="w-9 h-9 bg-[#1a472a] rounded-lg flex items-center justify-center shrink-0">
-                <span className="text-white font-bold text-base">A</span>
-              </div>
-              <div className="flex flex-col leading-none">
-                <span
-                  className="text-[#1a472a] font-bold text-xl tracking-tight"
-                  style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
-                >
-                  Aku<span className="text-[#22c55e]">Mart</span>
-                </span>
-                <span className="text-gray-400 text-[9px] tracking-wide">
-                  Waste Today. Resource Tomorrow.
-                </span>
-              </div>
+              <img src={Logo} alt="logo" />
             </Link>
           
           </div>
