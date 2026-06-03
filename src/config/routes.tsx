@@ -43,7 +43,7 @@ export function Routes() {
       children: [
         { path: "/signin", element: <SignIn /> },
         { path: "/register", element: <Register /> },
-        { path: "/forgotpassword", element: <ForgetPassword /> },
+        { path: "/forgot-password", element: <ForgetPassword /> },
       ],
     },
   ];
