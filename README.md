@@ -2,7 +2,7 @@
  
 > Nigeria's B2B marketplace connecting waste-generating businesses with resource-seeking SMEs.
  
-Built for the **OPay Innovative Challenge 2026** · Starting from Owerri, expanding across Nigeria.
+Starting from Owerri, expanding across Nigeria.
 
 ## Overview
  
