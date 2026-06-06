@@ -260,9 +260,9 @@ export const Home = () => {
   ];
 
   const buyerSteps: StepProps[] = [
-    { iconSrc: List, text: "List Waste Materials" },
-    { iconSrc: People, text: "Connect With Buyers" },
-    { iconSrc: Paid, text: "Get Paid Securely" },
+    { iconSrc: List, text: "Secure reliable supply." },
+    { iconSrc: People, text: "Quality Materials." },
+    { iconSrc: Paid, text: "Reduce production costs." },
   ];
 
   return (

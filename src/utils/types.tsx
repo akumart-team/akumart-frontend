@@ -27,7 +27,8 @@ export type WasteCategory =
 export interface User {
   id: string;
   role: UserRole;
-  fullName: string;
+  first_name: string;     
+  last_name: string; 
   email: string;
   phone: string;
   state: string;
@@ -43,6 +44,16 @@ export interface User {
   totalTransactions?: number;
   // Buyer-only
   productionDescription?: string;
+}
+
+// Add these to your existing utils/types.ts file
+
+export interface LoginResponse {
+  access_token: string;
+  refresh_token: string;
+  token_type: string;
+  expires_in: number;
+  user: User; 
 }
 
 export interface AuthState {

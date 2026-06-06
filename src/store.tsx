@@ -2,12 +2,13 @@ import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
 import type { User, UINotification } from "./utils/types";
 
-// ─── AUTH STORE ───────────────────────────────────────────
+//  AUTH STORE 
 interface AuthStore {
   user: User | null;
   token: string | null;
+  refreshToken: string | null;       
   isAuthenticated: boolean;
-  setUser: (user: User, token: string) => void;
+  setUser: (user: User, token: string, refreshToken: string) => void;
   logout: () => void;
   updateUser: (updates: Partial<User>) => void;
 }
@@ -17,9 +18,20 @@ export const useAuthStore = create<AuthStore>()(
     (set) => ({
       user: null,
       token: null,
+      refreshToken: null,
       isAuthenticated: false,
-      setUser: (user, token) => set({ user, token, isAuthenticated: true }),
-      logout: () => set({ user: null, token: null, isAuthenticated: false }),
+
+      setUser: (user, token, refreshToken) =>
+        set({ user, token, refreshToken, isAuthenticated: true }),
+
+      logout: () =>
+        set({
+          user: null,
+          token: null,
+          refreshToken: null,
+          isAuthenticated: false,
+        }),
+
       updateUser: (updates) =>
         set((state) => ({
           user: state.user ? { ...state.user, ...updates } : null,
@@ -31,13 +43,14 @@ export const useAuthStore = create<AuthStore>()(
       partialize: (state) => ({
         user: state.user,
         token: state.token,
+        refreshToken: state.refreshToken,
         isAuthenticated: state.isAuthenticated,
       }),
     }
   )
 );
 
-// ─── UI STORE ─────────────────────────────────────────────
+// UI STORE ─
 interface UIStore {
   isLoading: boolean;
   activeModal: string | null;
