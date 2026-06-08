@@ -6,8 +6,17 @@ export * from "./Privacy";
 export * from "./Missing";
 export * from "./ForgetPassword";
 
+export * from "./seller/SellerDashboard"; 
+
+
+
 export * from "./buyer/BuyerDashboard";
-export * from "./seller/SellerDashboard";   
+export * from "./buyer/AIRecommendation";
+export * from "./buyer/MarketPlace";
+export * from "./buyer/Orders";
+export * from "./buyer/Settings";
+
+
 
 
    

@@ -1,14 +1,27 @@
 import { useRoutes } from "react-router";
 import type { RouteObject } from "react-router-dom";
 import { Outlet, Navigate } from "react-router-dom";
-import { Home, ForgetPassword, Privacy, Register, SignIn, BuyerDashboard,SellerDashboard } from "../pages";
+import {
+  Home,
+  ForgetPassword,
+  Privacy,
+  Register,
+  SignIn,
+  BuyerDashboard,
+  SellerDashboard,
+  Orders,
+  AIRecommendation,
+  MarketPlace,
+  Settings,
+} from "../pages";
 import { ScrollToTop } from "../components/layout/ScrollToTop";
-import {Header} from "../components/layout/Header";
-import {Footer} from "../components/layout/Footer";
+import { Header } from "../components/layout/Header";
+import { Footer } from "../components/layout/Footer";
+import BuyerLayout from "../components/layout/BuyerLayout";
 
 import { useAuthStore } from "../store";
 
-// Layouts 
+// Layouts
 
 const MainLayout = () => (
   <>
@@ -27,7 +40,11 @@ const AuthLayout = () => (
 );
 
 // Protects dashboard routes — redirects to /signin if not logged in
-const ProtectedRoute = ({ allowedRole }: { allowedRole: "seller" | "buyer" }) => {
+const ProtectedRoute = ({
+  allowedRole,
+}: {
+  allowedRole: "seller" | "buyer";
+}) => {
   const { isAuthenticated, user } = useAuthStore();
 
   if (!isAuthenticated) {
@@ -42,7 +59,7 @@ const ProtectedRoute = ({ allowedRole }: { allowedRole: "seller" | "buyer" }) =>
   return <Outlet />;
 };
 
-//  Routes 
+//  Routes
 
 export function Routes() {
   const routes: RouteObject[] = [
@@ -71,17 +88,25 @@ export function Routes() {
     {
       path: "/seller",
       element: <ProtectedRoute allowedRole="seller" />,
-      children: [
-        { path: "dashboard", element: <SellerDashboard /> },
-      ],
+      children: [{ path: "dashboard", element: <SellerDashboard /> }],
     },
 
     // Buyer dashboard — protected, buyer only
+
     {
       path: "/buyer",
       element: <ProtectedRoute allowedRole="buyer" />,
       children: [
-        { path: "dashboard", element: <BuyerDashboard /> },
+        {
+          element: <BuyerLayout />,
+          children: [
+            { path: "dashboard", element: <BuyerDashboard /> },
+            { path: "orders", element: <Orders /> },
+            { path: "settings", element: <Settings /> },
+            { path: "AIRecomendation", element: <AIRecommendation /> },
+            { path: "marketplace", element: <MarketPlace /> },
+          ],
+        },
       ],
     },
   ];
