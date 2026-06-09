@@ -1,12 +1,12 @@
 
 import { NavLink,  } from "react-router-dom";
 
-import Dashboard from "../assets/icons/dashboard.png"
-import Settings from "../assets/icons/settings.png"
-import Cart from "../assets/icons/cart.png"
-import Search from "../assets/icons/search.png"
-import Ai from "../assets/icons/ai.png"
-import Logo from "../assets/imgs/logo.png"
+import Dashboard from "../../assets/icons/dashboard.png"
+import Settings from "../../assets/icons/settings.png"
+import Cart from "../../assets/icons/cart.png"
+import Search from "../../assets/icons/search.png"
+import Ai from "../../assets/icons/ai.png"
+import Logo from "../../assets/imgs/logo.png"
 
 interface BuyerSidebarProps {
   onClose: () => void;
@@ -18,7 +18,7 @@ export default function BuyerSidebar({ onClose }: BuyerSidebarProps) {
   const navigationItems = [
     { name: "Dashboard", 
     path: "/buyer/dashboard", 
-    icon: Dashboard},
+    icon: Dashboard },
     { name: "AI Recommendations", path: "/buyer/AIRecomendation", icon: Ai },
     { name: "Browse Marketplace", path: "/buyer/marketplace", icon: Search },
     { name: "Orders", path: "/buyer/orders", icon: Cart },
@@ -26,19 +26,19 @@ export default function BuyerSidebar({ onClose }: BuyerSidebarProps) {
   ];
 
   return (
-    <div className="flex flex-col h-full bg-white justify-between">
+    <div className="flex flex-col h-full bg-white justify-between ">
       <div>
         {/* Brand Header Identity */}
         <div className="h-20 flex items-center px-6 border-b border-[#E9ECEF]">
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-[#10B981] rounded-lg flex items-center justify-center text-white font-bold text-sm">
+          <div className="flex items-center gap-2 w-40">
+            
              <img src={Logo} alt='logo'/>
-          </div>
+          
           </div>
         </div>
 
         {/* Dynamic Navigation Container Stack */}
-        <nav className="mt-6 px-4 space-y-1">
+        <nav className="mt-6 px-4 space-y-1 font-['Plus_Jakarta_Sans',sans-serif] ">
           {navigationItems.map((item) => (
             <NavLink
               key={item.name}
@@ -48,12 +48,23 @@ export default function BuyerSidebar({ onClose }: BuyerSidebarProps) {
                 flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold tracking-wide transition-all duration-200
                 ${isActive 
                   ? "bg-[#10B981] text-white shadow-sm" 
-                  : "text-[#6C757D] hover:bg-[#F8F9FA] hover:text-[#111827]"
+                  : "text-[#818181] hover:bg-[#F8F9FA] hover:text-[#111827]"
                 }
               `}
             >
-              <span className="text-lg">{item.icon}</span>
-              {item.name}
+              {({ isActive }) => (
+                <>
+                  
+                  <img
+                    src={item.icon}
+                    alt={`${item.name} icon`}
+                    className={`w-5 h-5 object-contain transition-all ${
+                      isActive ? "invert-0 brightness-200" : " opacity-70"
+                    }`}
+                  />
+                  <span>{item.name}</span>
+                </>
+              )}
             </NavLink>
           ))}
         </nav>

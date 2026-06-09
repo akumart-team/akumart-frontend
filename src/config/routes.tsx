@@ -95,7 +95,7 @@ export function Routes() {
 
     {
       path: "/buyer",
-      element: <ProtectedRoute allowedRole="buyer" />,
+      // element: <ProtectedRoute allowedRole="buyer" />,
       children: [
         {
           element: <BuyerLayout />,
