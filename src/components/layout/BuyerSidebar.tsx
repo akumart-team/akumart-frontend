@@ -45,10 +45,10 @@ export default function BuyerSidebar({ onClose }: BuyerSidebarProps) {
               to={item.path}
               onClick={onClose}
               className={({ isActive }) => `
-                flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold tracking-wide transition-all duration-200
+                flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium tracking-wide transition-all duration-200
                 ${isActive 
-                  ? "bg-[#10B981] text-white shadow-sm" 
-                  : "text-[#818181] hover:bg-[#F8F9FA] hover:text-[#111827]"
+                  ? "bg-[#16A34A] text-white shadow-sm" 
+                  : "text-[#111827]  hover:bg-[#F8F9FA] hover:text-[#818181]"
                 }
               `}
             >
@@ -58,8 +58,8 @@ export default function BuyerSidebar({ onClose }: BuyerSidebarProps) {
                   <img
                     src={item.icon}
                     alt={`${item.name} icon`}
-                    className={`w-5 h-5 object-contain transition-all ${
-                      isActive ? "invert-0 brightness-200" : " opacity-70"
+                    className={`w-5 h-5 object-contain transition-all  ${
+                      isActive ? "invert-0 brightness-200" : " text-[#111827] "
                     }`}
                   />
                   <span>{item.name}</span>
@@ -74,7 +74,7 @@ export default function BuyerSidebar({ onClose }: BuyerSidebarProps) {
       <div className="p-4 border-t border-[#E9ECEF]">
         <div className="flex items-center gap-3 p-2 mb-3">
           <div className="w-10 h-10 rounded-full bg-slate-200 overflow-hidden">
-            <span className="w-full h-full flex items-center justify-center text-sm font-bold bg-[#E8F5E9] text-[#10B981]">
+            <span className="w-full h-full flex items-center justify-center text-sm font-bold bg-[#E8F5E9] text-[#16A34A]">
               PN
             </span>
           </div>
