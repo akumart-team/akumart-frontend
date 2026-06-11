@@ -27,7 +27,7 @@ export default function BuyerHeader({ onMenuToggle }: BuyerHeaderProps) {
       return {
         title: "AI Recommendation",
         subtitle:
-          "Get a quick overview of your listings, orders, sales, and earnings.",
+          "Discover materials tailored to your sourcing needs.",
       };
     if (path.includes("/buyer/marketplace"))
       return {

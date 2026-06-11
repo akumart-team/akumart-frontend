@@ -269,7 +269,7 @@ export const Home = () => {
     <div className="w-full bg-[#FAFAFA] font-['Plus_Jakarta_Sans',sans-serif] antialiased">
       {/* SECTION 1: HERO */}
 
-      <section className=" mx-auto px-6 pt-25 pb-8 md:px-16 md:pt-35 md:pb-20 flex flex-col md:flex-row items-center justify-between gap-10">
+      <section className=" mx-auto px-6  pt-35  pb-8 md:px-16 md:pt-35 md:pb-20 flex flex-col md:flex-row items-center justify-between gap-10">
         <div className="w-full md:w-1/2 flex flex-col items-start text-left">
           <h1 className="text-[#0D2B1E] text-[24px] md:text-[34px] lg:text-[64px] font-extrabold leading-7.5 md:leading-10 lg:leading-18 tracking-[0.92px] mb-6">
             The <span className="text-[#A3E635]">B2B</span> Marketplace for
@@ -281,7 +281,7 @@ export const Home = () => {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
             <button className="bg-[#16A34A] hover:bg-[#059669] text-white font-semibold py-4 px-6 rounded-xl transition duration-200 text-center">
-              <Link to="/signup">Browse Marketplace</Link>
+              <Link to="/register">Browse Marketplace</Link>
             </button>
             <button className="bg-[#E5E7EB] hover:bg-[#D1D5DB] text-[#374151] font-semibold py-4 px-6 rounded-xl transition duration-200 text-center">
               <Link to="/register">Get Started</Link>
