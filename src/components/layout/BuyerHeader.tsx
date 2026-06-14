@@ -69,12 +69,12 @@ export default function BuyerHeader({ onMenuToggle }: BuyerHeaderProps) {
           <HamburgerIcon isOpen={false} />
         </button>
         <div className="hidden md:block">
-          <h1 className="text-[24px] font-bold leading-tight pt-3">
+          <h1 className="text-[16px] lg:text-[24px] font-bold leading-tight pt-3">
             <span className="text-[#0F172A]">Your </span>
             <span className="text-[#9ADE2A]">{pageInfo.title}</span>
           </h1>
 
-          <p className=" text-[12px] text-[#6B7280]">{pageInfo.subtitle}</p>
+          <p className="text-xs lg:text-[12px] text-[#6B7280]">{pageInfo.subtitle}</p>
         </div>
       </div>
 

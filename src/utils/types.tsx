@@ -70,27 +70,17 @@ export type ListingStatus = "active" | "paused" | "sold_out" | "deleted";
 
 export interface Listing {
   id: string;
-  sellerId: string;
-  sellerName: string;
-  sellerRating?: number;
+  category: string;
   title: string;
-  description: string;
-  categories: WasteCategory[];
-  weightKg: number;
-  priceMin: number;
-  priceMax: number;
+  rating: number;
+  company: string;
   location: string;
-  state: string;
-  city: string;
-  availableFrom: string;
-  availableTo: string;
-  photos: string[];
-  logisticsPreference: LogisticsPreference;
-  status: ListingStatus;
-  createdAt: string;
-  updatedAt: string;
-  trustLabel?: "Highly Active" | "Reliable Seller" | "New on Platform";
-  trustSummary?: string;
+  distance: string;
+  weight: string;
+  price: number;
+  pricePerKg: number;
+  availability: "Immediate" | "Scheduled";
+  isBookmarked: boolean;
 }
 
 //  ORDERS 
@@ -229,4 +219,20 @@ export interface UIState {
   isLoading: boolean;
   activeModal: string | null;
   notifications: UINotification[];
+}
+
+export interface FilterPanelProps {
+  selectedCategory: string;
+  setSelectedCategory: (v: string) => void;
+  state: string;
+  setState: (v: string) => void;
+  minQty: string;
+  setMinQty: (v: string) => void;
+  sortBy: string;
+  setSortBy: (v: string) => void;
+  onReset: () => void;
+}
+export interface MobileFilterDrawerProps extends FilterPanelProps {
+  isOpen: boolean;
+  onClose: () => void;
 }
