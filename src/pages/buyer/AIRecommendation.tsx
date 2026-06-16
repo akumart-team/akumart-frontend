@@ -438,7 +438,7 @@ export const AIRecommendation = () => {
         {/* Filter icon button — mobile only */}
         <button
           onClick={() => setMobileFilterOpen(true)}
-          className="md:hidden flex items-center justify-center w-11 h-11 bg-white border border-[#E9ECEF] rounded-xl shadow-sm text-[#6B7280] hover:text-[#16A34A] hover:border-[#16A34A] transition-colors flex-shrink-0"
+          className="md:hidden flex items-center justify-center w-11 h-11 bg-white border border-[#E9ECEF] rounded-xl shadow-sm text-[#6B7280] hover:text-[#16A34A] hover:border-[#16A34A] transition-colors shrink-0"
           aria-label="Open filters"
         >
           <FilterIcon />

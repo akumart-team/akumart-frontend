@@ -64,7 +64,7 @@ export const AIProductOverview: React.FC = () => {
           <div className="lg:col-span-8 space-y-6">
             {/* Primary Product Card Frame */}
             <div className="bg-white rounded-3xl border border-[#E5E7EB] p-6 shadow-sm overflow-hidden">
-              {/* Image Header Area */}
+              
               <div className="relative w-full h-70 md:h-90 rounded-2xl overflow-hidden mb-6">
                 <img
                   src={Plastics}
@@ -225,7 +225,7 @@ export const AIProductOverview: React.FC = () => {
             </div>
 
             {/* Ratings & Client Feedback Reviews Frame */}
-            <div className="bg-white rounded-[24px] border border-[#E5E7EB] p-6 shadow-sm space-y-6">
+            <div className="bg-white rounded-3xl border border-[#E5E7EB] p-6 shadow-sm space-y-6">
               <div className="flex justify-between items-center">
                 <h3 className="text-lg font-bold text-[#111827]">
                   Recent Review
@@ -266,7 +266,7 @@ export const AIProductOverview: React.FC = () => {
           {/* RIGHT COLUMN: AI Evaluation Engine & Dynamic Invoice Pricing (Takes 4 cols on Desktop) */}
           <div className="lg:col-span-4 space-y-6 lg:sticky lg:top-6">
             {/* Emerald AI Insight Box */}
-            <div className="bg-[#16A34A] text-white rounded-[24px] p-6 shadow-sm relative overflow-hidden">
+            <div className="bg-[#16A34A] text-white rounded-3xl p-6 shadow-sm relative overflow-hidden">
               <div className="relative z-10 space-y-4">
                 <div>
                   <div className="flex items-center gap-1.5 mb-1">
@@ -337,7 +337,7 @@ export const AIProductOverview: React.FC = () => {
                   </button>
 
                   {/* Value Box */}
-                  <div className="flex-1 min-h-[44px] flex items-center justify-center border border-[#E5E7EB] rounded-xl bg-white px-4">
+                  <div className="flex-1 min-h-11 flex items-center justify-center border border-[#E5E7EB] rounded-xl bg-white px-4">
                     <span className="text-base font-medium text-[#111827]">
                       {quantity}
                     </span>

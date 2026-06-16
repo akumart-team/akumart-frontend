@@ -82,11 +82,11 @@ export default function BuyerHeader({ onMenuToggle }: BuyerHeaderProps) {
       <div className="flex items-center gap-4">
         {/* Action Button Badges */}
         <div className="flex items-center gap-1">
-          <button className="p-2 text-[#495057]  hover:bg-[#F8F9FA] rounded-full relative w-12">
+          <button className="p-2 text-[#495057]  hover:bg-[#F8F9FA] rounded-full relative w-10">
             <img src={Notification} alt="notification" />
-            <span className="absolute top-1 right-1 w-2 h-2 bg-[#DC3545] rounded-full" />
+         
           </button>
-          <button className="p-2 text-[#495057] hover:bg-[#F8F9FA] rounded-full w-12">
+          <button className="p-2 text-[#495057] hover:bg-[#F8F9FA] rounded-full w-10">
             <img src={Mail} alt="mail" />
           </button>
         </div>

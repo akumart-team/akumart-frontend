@@ -236,3 +236,37 @@ export interface MobileFilterDrawerProps extends FilterPanelProps {
   isOpen: boolean;
   onClose: () => void;
 }
+
+//  ORDER PAYMENT — Types
+
+
+export type CardPaymentMethod = "mastercard" | "visa" | "bank";
+
+export interface OrderData {
+  productName: string;
+  seller: string;
+  quantity: string;
+  productPrice: number;
+  transactionFee: number;
+  total: number;
+  orderId: string;
+}
+
+export interface DeliveryFormData {
+  streetAddress: string;
+  city: string;
+  state: string;
+  postalCode: string;
+}
+
+export interface CardFormData {
+  cardNumber: string;
+  cardHolder: string;
+  expiry: string;
+  cvv: string;
+}
+
+export interface OrderSuccessData {
+  orderId: string;
+  totalPaid: number;
+}
