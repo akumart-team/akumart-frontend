@@ -1,246 +1,413 @@
-import Plastics from "../assets/imgs/plastics.png";
+import React, { useState } from "react";
 
-// Reusable custom SVG Icons to match Figma designs perfectly
-const StarIcon = () => (
-  <svg width="14" height="14" viewBox="0 0 24 24" fill="#F59E0B" stroke="#F59E0B">
-    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
-  </svg>
-);
+import {
+  BackIcon,
+  WeightIcon,
+  LocationIcon,
+  StarIcon,
+  BookmarkIcon,
+  CartIcon,
+  VerifiedIcon,
+  PlusIcon,
+  MinusIcon,
+  AIIcon,
+} from "./icons";
+import Plastics from "../../assets/imgs/plastics.png";
 
-const LocationIcon = () => (
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6B7280" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
-    <circle cx="12" cy="10" r="3" />
-  </svg>
-);
-
-const CloseIcon = () => (
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#374151" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <line x1="18" y1="6" x2="6" y2="18"></line>
-    <line x1="6" y1="6" x2="18" y2="18"></line>
-  </svg>
-);
-
-const BackIcon = () => (
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#374151" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-    <path d="m15 18-6-6 6-6" />
-  </svg>
-);
-
-interface AIProductOverviewProps {
-  listing: {
-    id: string;
-    category: string;
-    title: string;
-    rating: number;
-    company: string;
-    location: string;
-    distance: string;
-    weight: string;
-    price: number;
-    pricePerKg: number;
-    availability: string;
-  } | null;
-  onClose: () => void;
+interface Review {
+  id: string;
+  author: string;
+  rating: number;
+  comment: string;
+  date: string;
 }
 
-export const AIProductOverview = ({ listing, onClose }: AIProductOverviewProps) => {
-  if (!listing) return null;
+export const AIProductOverview: React.FC = () => {
+  const [quantity, setQuantity] = useState<number>(110);
+  const pricePerKg = 110;
+  const basePrice = quantity * pricePerKg;
+  const serviceFee = Math.round(basePrice * 0.05);
+  const totalPrice = basePrice + serviceFee;
+
+  const reviews: Review[] = [
+    {
+      id: "1",
+      author: "Praise Godwin",
+      rating: 5,
+      comment:
+        "Excellent quality materials, well packaged and delivered on time.",
+      date: "5 days ago",
+    },
+    {
+      id: "2",
+      author: "Praise Godwin",
+      rating: 5,
+      comment:
+        "Excellent quality materials, well packaged and delivered on time.",
+      date: "5 days ago",
+    },
+  ];
 
   return (
-    <>
+    <div className="min-h-screen bg-[#F9FAFB] text-[#1F2937] font-sans antialiased">
+      {/* Container Wrapper matching your design's layout limits */}
+      <div className="max-w-360 mx-auto px-2 ">
+        {/* Back Button Link */}
+        <button className="flex items-center gap-2 text-sm font-medium text-[#4B5563] mb-3 hover:text-black transition-colors">
+          <BackIcon />
+          <span>Back</span>
+        </button>
+
+        {/* Main Component Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          {/* LEFT COLUMN: Main Info & Scrolling Product Dossier (Takes 8 cols on Desktop) */}
+          <div className="lg:col-span-8 space-y-6">
+            {/* Primary Product Card Frame */}
+            <div className="bg-white rounded-3xl border border-[#E5E7EB] p-6 shadow-sm overflow-hidden">
+              {/* Image Header Area */}
+              <div className="relative w-full h-70 md:h-90 rounded-2xl overflow-hidden mb-6">
+                <img
+                  src={Plastics}
+                  alt="PET Bottles crushed stack"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+
+              {/* Status Tags & Pricing Metadata */}
+              <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-4">
+                <div>
+                  <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-[#A3E635] text-[#15803D] mb-2">
+                    Available
+                  </span>
+                  <h1 className="text-2xl font-bold text-[#111827]">
+                    PET Bottles
+                  </h1>
+                </div>
+                <div className="text-left md:text-right">
+                  <div className="text-2xl md:text-3xl font-extrabold text-[#16A34A]">
+                    ₦{basePrice.toLocaleString()}
+                  </div>
+                  <span className="text-xs text-[#6B7280]">
+                    ₦{pricePerKg}/kg
+                  </span>
+                </div>
+              </div>
+
+              {/* Quick Logistics Specs Tags */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
+                <div className="flex items-center gap-3 bg-[#F9FAFB] p-3 rounded-xl border border-[#F3F4F6]">
+                  <WeightIcon />
+                  <div>
+                    <p className="text-xs text-[#9CA3AF]">Available Weight</p>
+                    <p className="text-sm font-medium text-[#374151]">
+                      500 kg available
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-3 bg-[#F9FAFB] p-3 rounded-xl border border-[#F3F4F6]">
+                  <WeightIcon />
+                  <div>
+                    <p className="text-xs text-[#9CA3AF]">
+                      Minimum Order Demand
+                    </p>
+                    <p className="text-sm font-medium text-[#374151]">100kg</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Location Tag */}
+              <div className="flex items-center gap-2 text-sm text-[#4B5563] bg-[#F9FAFB] px-4 py-2.5 rounded-xl w-fit mb-6">
+                <LocationIcon />
+                <span className="font-medium">Ikeja, Lagos</span>
+                <span className="text-[#9CA3AF]">•</span>
+                <span className="text-[#6B7280]">2.3 km</span>
+              </div>
+
+              {/* Detailed Technical Description */}
+              <div className="space-y-2">
+                <h3 className="text-lg font-bold text-[#111827]">
+                  Description
+                </h3>
+                <p className="text-sm leading-relaxed text-[#4B5563]">
+                  High-quality waste material, properly sorted and cleaned. All
+                  materials are inspected and meet industry standards. Perfect
+                  for recycling facilities and manufacturing plants. We ensure
+                  prompt delivery and professional handling throughout the
+                  process.
+                </p>
+
+                {/* Technical Product Specifications Tables */}
+                <div className="pt-2 space-y-3">
+                  <div>
+                    <h4 className="text-xs font-bold uppercase tracking-wider text-[#111827] mb-1">
+                      Material Condition:
+                    </h4>
+                    <p className="text-sm font-medium text-[#374151]">
+                      Clean and Sorted
+                    </p>
+                  </div>
+                  <div className="grid grid-cols-2 gap-4 pt-2">
+                    <div>
+                      <h4 className="text-xs font-bold uppercase tracking-wider text-[#111827] mb-1">
+                        Product Information
+                      </h4>
+                      <p className="text-sm text-[#374151]">Listed</p>
+                      <p className="text-sm font-medium text-[#374151]">
+                        Updated
+                      </p>
+                    </div>
+                    <div>
+                      <h4 className="text-xs font-bold uppercase tracking-wider text-[#9CA3AF] opacity-0 mb-1">
+                        Update Info
+                      </h4>
+                      <p className="text-sm text-[#6B7280]">7 days ago</p>
+                      <p className="text-sm font-medium text-[#6B7280]">
+                        1 day ago
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Seller Profiles Frame */}
+            <div className="bg-white rounded-3xl border border-[#E5E7EB] p-6 shadow-sm">
+              <h3 className="text-lg font-bold text-[#111827] mb-4">
+                Seller Details
+              </h3>
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-12 h-12 rounded-full overflow-hidden bg-emerald-100">
+                  <img
+                    src="/api/placeholder/48/48"
+                    alt="Eco Recycle Ltd logo"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div>
+                  <div className="flex items-center gap-1.5">
+                    <h4 className="font-bold text-[#111827]">
+                      Eco Recycle Ltd
+                    </h4>
+                    <VerifiedIcon />
+                  </div>
+                  <div className="flex items-center gap-1 text-xs text-[#6B7280]">
+                    <StarIcon />
+                    <span className="font-semibold text-[#111827]">4.8</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Verified Seller Stats Badges */}
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
+                {[
+                  { label: "Total Sales", val: "25" },
+                  { label: "Completion Rate", val: "92%" },
+                  { label: "Response Time", val: "> 90 Mins" },
+                  { label: "No Of Available Listing", val: "9" },
+                ].map((stat, idx) => (
+                  <div
+                    key={idx}
+                    className="bg-[#F6F8F7] border border-[#F3F4F6] p-3 rounded-2xl text-center"
+                  >
+                    <p className="text-xl font-bold text-[#111827] mb-1">
+                      {stat.val}
+                    </p>
+                    <p className="text-[11px] leading-tight text-[#6B7280] font-medium">
+                      {stat.label}
+                    </p>
+                  </div>
+                ))}
+              </div>
+
+              <button className=" bg-[#16A34A] border border-[#E5E7EB] text-white hover:[#16A34A] font-bold py-3 px-4 rounded-xl text-sm transition-all">
+                View Full Seller Profile
+              </button>
+            </div>
+
+            {/* Ratings & Client Feedback Reviews Frame */}
+            <div className="bg-white rounded-[24px] border border-[#E5E7EB] p-6 shadow-sm space-y-6">
+              <div className="flex justify-between items-center">
+                <h3 className="text-lg font-bold text-[#111827]">
+                  Recent Review
+                </h3>
+                <button className="text-sm font-bold text-[#16A34A] hover:underline">
+                  See all
+                </button>
+              </div>
+
+              <div className="space-y-4">
+                {reviews.map((review, idx) => (
+                  <div
+                    key={idx}
+                    className="bg-[#F9FAFB] border border-[#F3F4F6] p-4 rounded-2xl space-y-2"
+                  >
+                    <div className="flex justify-between items-start">
+                      <h4 className="text-sm font-bold text-[#111827]">
+                        {review.author}
+                      </h4>
+                      <span className="text-xs text-[#9CA3AF] font-medium">
+                        {review.date}
+                      </span>
+                    </div>
+                    <div className="flex gap-0.5">
+                      {[...Array(review.rating)].map((_, i) => (
+                        <StarIcon key={i} />
+                      ))}
+                    </div>
+                    <p className="text-xs text-[#4B5563] leading-relaxed font-medium">
+                      {review.comment}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* RIGHT COLUMN: AI Evaluation Engine & Dynamic Invoice Pricing (Takes 4 cols on Desktop) */}
+          <div className="lg:col-span-4 space-y-6 lg:sticky lg:top-6">
+            {/* Emerald AI Insight Box */}
+            <div className="bg-[#16A34A] text-white rounded-[24px] p-6 shadow-sm relative overflow-hidden">
+              <div className="relative z-10 space-y-4">
+                <div>
+                  <div className="flex items-center gap-1.5 mb-1">
+                    <span className="text-lg px-2 py-0.5 rounded-md font-bold tracking-wide flex items-center gap-1">
+                      <AIIcon />
+                    </span>
+                    <span className="text-md px-2 py-0.5 rounded-md font-bold "> Highly Recommended</span>
+                   
+                
+                  </div>
+                  
+                </div>
+
+                {/* Progress Bar Indicators */}
+                <div className="space-y-1">
+                  <div className="w-full bg-white/20 h-2 rounded-full overflow-hidden">
+                    <div
+                      className="bg-white h-full rounded-full"
+                      style={{ width: "92%" }}
+                    ></div>
+                  </div>
+                  <div className="text-right text-xs font-bold text-white/90">
+                    92%
+                  </div>
+                </div>
+
+                {/* List Parameters */}
+                <ul className="space-y-3 text-xs font-medium text-white/90 pt-2 border-t border-white/10">
+                  <li className="flex items-start gap-2.5">
+                    <VerifiedIcon />
+                    <span>
+                      Material quality verified by previous transactions.
+                    </span>
+                  </li>
+                  <li className="flex items-start gap-2.5">
+                    <VerifiedIcon />
+                    <span>
+                      This listing closely matches your typical purchase
+                      pattern.
+                    </span>
+                  </li>
+                  <li className="flex items-start gap-2.5">
+                    <VerifiedIcon />
+                    <span>
+                      Seller has 92% positive feedback from similar buyers.
+                    </span>
+                  </li>
+                </ul>
+              </div>
+
+              {/* Abstract subtle background shapes to replicate figma glowing accent */}
+              <div className="absolute -right-12 -bottom-12 w-44 h-44 bg-white/10 rounded-full blur-2xl pointer-events-none"></div>
+            </div>
+
+            {/* Check-Out / Price Verification Action Card Container */}
+            <div className="bg-white rounded-3xl border border-[#E5E7EB] p-6 shadow-sm space-y-6">
+              {/* Counter Input Segment */}
+              <div className="space-y-2">
+                <div className="flex items-center justify-between gap-3">
+                  {/* Minus Button */}
+                  <button
+                    onClick={() =>
+                      setQuantity((prev) => Math.max(20, prev - 10))
+                    }
+                    className="w-11 h-11 flex items-center justify-center bg-white border border-[#E5E7EB] text-[#6B7280] hover:bg-gray-50 rounded-xl transition-colors shrink-0"
+                  >
+                    <MinusIcon />
+                  </button>
+
+                  {/* Value Box */}
+                  <div className="flex-1 min-h-[44px] flex items-center justify-center border border-[#E5E7EB] rounded-xl bg-white px-4">
+                    <span className="text-base font-medium text-[#111827]">
+                      {quantity}
+                    </span>
+                  </div>
+
+                  {/* Plus Button */}
+                  <button
+                    onClick={() =>
+                      setQuantity((prev) => Math.min(500, prev + 10))
+                    }
+                    className="w-11 h-11 flex items-center justify-center bg-white border border-[#E5E7EB] text-[#6B7280] hover:bg-gray-50 rounded-xl transition-colors shrink-0"
+                  >
+                    <PlusIcon />
+                  </button>
+                </div>
+
+                {/* Metadata Sub-labels */}
+                <div className="flex justify-between items-center text-xs text-[#6B7280] px-0.5">
+                  <span>Min: 20kg</span>
+                  <span>Available: 500kg</span>
+                </div>
+              </div>
+
+              {/* Integrated Receipt Breakdown Wrapper */}
+              <div className="border border-[#E5E7EB] rounded-2xl p-4 bg-white space-y-3.5">
+                <div className="flex justify-between items-start text-sm text-[#4B5563]">
+                  <div>
+                    <p className="font-medium">Product</p>
+                    <p className="text-xs text-[#9CA3AF] mt-0.5">
+                      + fee (approx 5%)
+                    </p>
+                  </div>
+                  <div className="text-right space-y-1">
+                    <p className="font-semibold text-[#111827]">
+                      ₦{basePrice.toLocaleString()}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex justify-between items-center pt-2 border-t border-[#F3F4F6]">
+                  <span className="text-base font-bold text-[#111827]">
+                    Total:
+                  </span>
+                  <span className="text-xl font-bold text-[#111827]">
+                    ₦{totalPrice.toLocaleString()}
+                  </span>
+                </div>
+              </div>
+
+              {/* Action Buttons Stack */}
+              <div className="space-y-3">
+                {/* Save Outline Action Button */}
+                <button className="w-full bg-white border border-[#E5E7EB] hover:bg-gray-50 text-[#374151] font-medium py-3 rounded-xl text-sm flex items-center justify-center gap-2 transition-all">
+                  <BookmarkIcon filled={false} />
+                  <span>Save</span>
+                </button>
+
+                {/* Place Order Primary Brand Button */}
+                <button className="w-full bg-[#16A34A] hover:bg-[#15803D] text-white font-medium py-3.5 rounded-xl text-sm shadow-sm transition-all flex items-center justify-center gap-2">
+                  <CartIcon />
+                  <span>Place Order</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+  
      
-      <div className="fixed inset-0 bg-white z-50 flex flex-col md:hidden">
-        {/* Sticky Mobile Top Header */}
-        <div className="flex items-center justify-between px-4 py-4 border-b border-gray-100 bg-white sticky top-0 z-10">
-          <div className="flex items-center gap-2">
-            <button onClick={onClose} className="p-1 -ml-1 text-gray-700" aria-label="Go back">
-              <BackIcon />
-            </button>
-            {/* <h2 className="text-[#111827] font-bold text-lg">Product Overview</h2> */}
-          </div>
-        </div>
-
-        {/* Scrollable Content Body */}
-        <div className="flex-1 overflow-y-auto p-4 space-y-5 pb-24 text-left">
-          {/* Main Hero Product Image */}
-          <div className="w-full h-52 bg-[#F8FAFC] rounded-2xl overflow-hidden border border-gray-100 flex items-center justify-center">
-            <img 
-              src={Plastics} 
-              alt={listing.title} 
-              className="w-full h-full object-cover"
-            />
-          </div>
-
-          {/* Heading Content Info block */}
-          <div>
-            <span className="bg-[#14532D] text-white text-[11px] font-semibold px-3 py-1 rounded-full uppercase tracking-wider">
-              {listing.category}
-            </span>
-            <h1 className="text-[#111827] text-2xl font-black mt-3 leading-tight tracking-tight">
-              {listing.title}
-            </h1>
-            <div className="flex items-center gap-1.5 mt-2">
-              <StarIcon />
-              <span className="text-[#F59E0B] text-xs font-bold">{listing.rating}</span>
-              <span className="text-gray-300 text-xs">•</span>
-              <span className="text-gray-500 text-xs font-medium">{listing.company}</span>
-            </div>
-          </div>
-
-          {/* Core Price Metrics Box */}
-          <div className="grid grid-cols-2 gap-4 bg-[#F8FAFC] p-4 rounded-xl border border-gray-100">
-            <div>
-              <p className="text-[11px] text-gray-400 font-bold uppercase tracking-wider">Est. Price</p>
-              <p className="text-[#16A34A] text-xl font-extrabold mt-0.5">
-                ₦{listing.price.toLocaleString()}
-              </p>
-            </div>
-            <div className="border-l border-gray-200 pl-4">
-              <p className="text-[11px] text-gray-400 font-bold uppercase tracking-wider">Price / kg</p>
-              <p className="text-[#111827] text-base font-extrabold mt-0.5">
-                ₦{listing.pricePerKg}/kg
-              </p>
-            </div>
-          </div>
-
-          {/* Details Segment List */}
-          <div className="space-y-4 pt-1">
-            <h3 className="text-[#111827] font-extrabold text-sm uppercase tracking-wider text-gray-400">Sourcing Details</h3>
-            <div className="space-y-3.5">
-              <div className="flex items-start gap-3">
-                <div className="mt-0.5 text-gray-400"><LocationIcon /></div>
-                <div>
-                  <p className="text-xs text-gray-400 font-medium">Location</p>
-                  <p className="text-sm font-semibold text-[#374151]">{listing.location} ({listing.distance})</p>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-3">
-                <div className="w-4 h-4 mt-0.5 rounded-full bg-emerald-50 border border-emerald-200 flex items-center justify-center text-[10px] text-[#16A34A] font-extrabold">✓</div>
-                <div>
-                  <p className="text-xs text-gray-400 font-medium">Available Weight</p>
-                  <p className="text-sm font-semibold text-[#374151]">{listing.weight}</p>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-3">
-                <div className="w-4 h-4 mt-0.5 rounded-full bg-emerald-50 border border-emerald-200 flex items-center justify-center text-[10px] text-[#16A34A] font-extrabold">✓</div>
-                <div>
-                  <p className="text-xs text-gray-400 font-medium">Logistics Availability</p>
-                  <p className="text-sm font-semibold text-[#374151]">{listing.availability} Delivery</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Sticky Fixed Bottom Button Layout bar */}
-        <div className="p-4 border-t border-gray-100 bg-white fixed bottom-0 left-0 right-0 z-10">
-          <button className="w-full bg-[#16A34A] hover:bg-[#15803D] text-white font-bold py-3.5 rounded-xl text-sm transition-colors shadow-sm">
-            Contact Seller
-          </button>
-        </div>
-      </div>
-
-
-      {/* ========================================================================= */}
-      {/* 2. LAPTOP INLINE PANEL VIEW (Matches Desktop Split Column Grid Exactly)   */}
-      {/* ========================================================================= */}
-      <div className="hidden md:flex w-[360px] lg:w-[390px] bg-white border border-[#E9ECEF] rounded-2xl flex-col sticky top-6 h-[calc(100vh-120px)] flex-shrink-0 shadow-sm overflow-hidden">
-        {/* Panel Header */}
-        <div className="flex items-center justify-between p-4 border-b border-gray-100">
-          <h3 className="text-[#111827] font-black text-base">Product Overview</h3>
-          <button 
-            onClick={onClose}
-            className="p-1.5 text-gray-400 hover:text-gray-600 rounded-xl hover:bg-gray-50 transition-colors"
-          >
-            <CloseIcon />
-          </button>
-        </div>
-
-        {/* Scrollable Column Dashboard Body Container */}
-        <div className="p-4 overflow-y-auto flex-1 space-y-4 text-left">
-          {/* Main Hero Card Image Frame */}
-          <div className="w-full h-44 bg-[#F8FAFC] rounded-xl overflow-hidden border border-gray-100 flex items-center justify-center">
-            <img 
-              src={Plastics} 
-              alt={listing.title} 
-              className="w-full h-full object-cover"
-            />
-          </div>
-
-          {/* Title Metrics Metadata Header */}
-          <div>
-            <span className="bg-[#14532D] text-white text-[10px] font-bold px-2.5 py-0.5 rounded-full uppercase tracking-wider">
-              {listing.category}
-            </span>
-            <h2 className="text-[#111827] text-lg font-extrabold mt-2 leading-snug tracking-tight">
-              {listing.title}
-            </h2>
-            <div className="flex items-center gap-1.5 mt-1.5">
-              <StarIcon />
-              <span className="text-[#F59E0B] text-xs font-bold">{listing.rating}</span>
-              <span className="text-gray-300 text-xs">•</span>
-              <span className="text-gray-400 text-xs font-semibold">{listing.company}</span>
-            </div>
-          </div>
-
-          {/* Metric Sub Grid Pricing Box Wrapper */}
-          <div className="grid grid-cols-2 gap-3 bg-[#F8FAFC] p-3.5 rounded-xl border border-gray-100">
-            <div>
-              <p className="text-[10px] text-gray-400 font-bold uppercase tracking-wider">Est. Price</p>
-              <p className="text-[#16A34A] text-lg font-extrabold mt-0.5">
-                ₦{listing.price.toLocaleString()}
-              </p>
-            </div>
-            <div className="border-l border-gray-200 pl-3">
-              <p className="text-[10px] text-gray-400 font-bold uppercase tracking-wider">Price / kg</p>
-              <p className="text-[#111827] text-sm font-extrabold mt-0.5">
-                ₦{listing.pricePerKg}/kg
-              </p>
-            </div>
-          </div>
-
-          {/* Sourcing Parameter Layout Blocks */}
-          <div className="space-y-3.5 border-t border-gray-100 pt-4">
-            <h4 className="text-[#111827] text-xs font-black uppercase tracking-wider text-gray-400">Sourcing Details</h4>
-            
-            <div className="space-y-3">
-              <div className="flex items-start gap-2.5">
-                <div className="mt-0.5 text-gray-400"><LocationIcon /></div>
-                <div>
-                  <p className="text-[11px] text-gray-400 font-medium">Location</p>
-                  <p className="text-xs font-bold text-[#374151]">{listing.location} ({listing.distance})</p>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-2.5">
-                <div className="w-3.5 h-3.5 rounded-full bg-emerald-50 border border-emerald-100 flex items-center justify-center text-[9px] text-[#16A34A] font-extrabold">✓</div>
-                <div>
-                  <p className="text-[11px] text-gray-400 font-medium">Available Weight</p>
-                  <p className="text-xs font-bold text-[#374151]">{listing.weight}</p>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-2.5">
-                <div className="w-3.5 h-3.5 rounded-full bg-emerald-50 border border-emerald-100 flex items-center justify-center text-[9px] text-[#16A34A] font-extrabold">✓</div>
-                <div>
-                  <p className="text-[11px] text-gray-400 font-medium">Logistics Availability</p>
-                  <p className="text-xs font-bold text-[#374151]">{listing.availability} Pickup</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Fixed Footprint Footer CTA Action Button */}
-        <div className="p-4 border-t border-gray-100 bg-white sticky bottom-0">
-          <button className="w-full bg-[#16A34A] hover:bg-[#15803D] text-white font-bold py-2.5 rounded-xl text-sm transition-colors shadow-sm">
-            Contact Seller
-          </button>
-        </div>
-      </div>
-    </>
+    </div>
   );
 };

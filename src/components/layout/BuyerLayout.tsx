@@ -34,7 +34,7 @@ export default function BuyerLayout() {
         <BuyerHeader onMenuToggle={() => setIsMobileSidebarOpen(!isMobileSidebarOpen)} />
         
         {/* Scrollable Context View Canvas */}
-        <main className="flex-1 overflow-y-auto p-4 md:p-8 max-w-350 w-full mx-auto">
+        <main className="flex-1 overflow-y-auto p-3 md:p-8 max-w-350 w-full mx-auto">
           <Outlet />
         </main>
       </div>

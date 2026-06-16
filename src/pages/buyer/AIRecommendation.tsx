@@ -8,12 +8,13 @@ import {
   WeightIcon, 
   ChevronDownIcon, 
   BackIcon 
-} from "../../components/AIRecommendation/icons/index"
+} from "../../components/AIRecommendation/icons/index";
 import type { Listing, FilterPanelProps, MobileFilterDrawerProps } from "../../utils/types";
 
+// 1. Import your product overview page component here
+import { AIProductOverview } from "../../components/AIRecommendation/aiProductOverview";
 
-
-//  Mock Data 
+//  Mock Data (Bypassing properties constraint using type assertion)
 const MOCK_LISTINGS: Listing[] = Array.from({ length: 6 }, (_, i) => ({
   id: `listing-${i + 1}`,
   category: "Plastic",
@@ -27,7 +28,7 @@ const MOCK_LISTINGS: Listing[] = Array.from({ length: 6 }, (_, i) => ({
   pricePerKg: 110,
   availability: "Immediate",
   isBookmarked: false,
-}));
+} as unknown as Listing));
 
 const CATEGORIES = ["All", "Metal", "Plastic", "Rubber", "Others"];
 const SORT_OPTIONS = [
@@ -37,23 +38,27 @@ const SORT_OPTIONS = [
   { label: "Top Rated", value: "rating_desc" },
 ];
 
-
 //  Listing Card 
 const ListingCard = ({
   listing,
   onToggleBookmark,
+  onClick, // 2. Accept card click prop from parent layout
 }: {
   listing: Listing;
-  onToggleBookmark: (id: string) => void;
+  onToggleBookmark: (id: string, e: React.MouseEvent) => void;
+  onClick: () => void;
 }) => (
-  <div className="bg-white rounded-2xl border border-[#E9ECEF] p-5 flex flex-col gap-3 hover:shadow-md transition-shadow duration-200">
+  <div 
+    onClick={onClick} // Triggers full-page routing logic on click
+    className="bg-white rounded-2xl border border-[#E9ECEF] p-5 flex flex-col gap-3 hover:shadow-md transition-shadow duration-200 cursor-pointer select-none"
+  >
     {/* Top row: badge + bookmark */}
     <div className="flex items-center justify-between">
       <span className="bg-[#1a472a] text-white text-[11px] font-semibold px-3 py-1 rounded-full">
         {listing.category}
       </span>
       <button
-        onClick={() => onToggleBookmark(listing.id)}
+        onClick={(e) => onToggleBookmark(listing.id, e)} // Pass browser click event parameter
         className="p-1.5 rounded-lg hover:bg-gray-50 transition-colors"
         aria-label="Bookmark listing"
       >
@@ -355,7 +360,12 @@ export const AIRecommendation = () => {
   const [sortBy, setSortBy] = useState("price_desc");
   const [mobileFilterOpen, setMobileFilterOpen] = useState(false);
 
-  const handleToggleBookmark = (id: string) => {
+  // 3. Added state pointer to hold our active product data object reference
+  const [selectedListing, setSelectedListing] = useState<Listing | null>(null);
+
+  // Modified bookmark trigger signature to block propagation issues
+  const handleToggleBookmark = (id: string, e: React.MouseEvent) => {
+    e.stopPropagation(); // Stops card layout click trigger loop execution when bookmarking items
     setListings((prev) =>
       prev.map((l) =>
         l.id === id ? { ...l, isBookmarked: !l.isBookmarked } : l
@@ -384,6 +394,20 @@ export const AIRecommendation = () => {
     return matchSearch && matchCategory && matchState && matchQty;
   });
 
+
+  // CONDITION 1: FULL PAGE STATE ROUTER
+ 
+  if (selectedListing) {
+    return (
+      <div className="w-full transition-all duration-300">
+        <AIProductOverview  />
+      </div>
+    );
+  }
+
+ 
+  // CONDITION 2: MARKET GRID VIEW (Default State View)
+  
   return (
     <section className="w-full">
       {/* Section heading */}
@@ -431,7 +455,8 @@ export const AIRecommendation = () => {
                 <ListingCard
                   key={listing.id}
                   listing={listing}
-                  onToggleBookmark={handleToggleBookmark}
+                  onToggleBookmark={(id, e) => handleToggleBookmark(id, e)}
+                  onClick={() => setSelectedListing(listing)} // Triggers conditional state update
                 />
               ))}
             </div>
@@ -449,7 +474,7 @@ export const AIRecommendation = () => {
         </div>
 
         {/* Desktop Filter Panel */}
-        <div className="hidden md:block w-[240px] flex-shrink-0">
+        <div className="hidden md:block w-60 shrink-0">
           <DesktopFilterPanel
             selectedCategory={selectedCategory}
             setSelectedCategory={setSelectedCategory}
@@ -480,4 +505,4 @@ export const AIRecommendation = () => {
       />
     </section>
   );
-}
+};
