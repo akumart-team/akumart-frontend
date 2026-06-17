@@ -13,6 +13,7 @@ import {
   AIIcon,
 } from "./icons";
 import Plastics from "../../assets/imgs/plastics.png";
+import { useNavigate } from 'react-router-dom';
 
 interface Review {
   id: string;
@@ -21,6 +22,8 @@ interface Review {
   comment: string;
   date: string;
 }
+
+
 
 export const AIProductOverview: React.FC = () => {
   const [quantity, setQuantity] = useState<number>(110);
@@ -47,6 +50,34 @@ export const AIProductOverview: React.FC = () => {
       date: "5 days ago",
     },
   ];
+  const navigate = useNavigate();
+ 
+  // Whatever "selected product" data AIProductOverview is currently showing.
+  // Replace this with your real product/listing object.
+const handlePlaceOrder = (product: {
+  id: string;
+  productName: string;
+  productPrice: number;
+  sellerName: string;
+  quantity: string;
+  total: number; // ← added
+}) => {
+  navigate('/buyer/orders', {
+    state: {
+      checkoutProduct: product,
+      openPaymentFor: product.id,
+    },
+  });
+};
+
+ const product = {
+  id: "pet-bottles-001",
+  productName: "PET Bottles",
+  productPrice: basePrice,
+  sellerName: "Eco Recycle Ltd",
+  quantity: `${quantity} kg`,
+  total: totalPrice, 
+};
 
   return (
     <div className="min-h-screen bg-[#F9FAFB] text-[#1F2937] font-sans antialiased">
@@ -396,7 +427,7 @@ export const AIProductOverview: React.FC = () => {
                 </button>
 
                 {/* Place Order Primary Brand Button */}
-                <button className="w-full bg-[#16A34A] hover:bg-[#15803D] text-white font-medium py-3.5 rounded-xl text-sm shadow-sm transition-all flex items-center justify-center gap-2">
+                <button className="w-full bg-[#16A34A] hover:bg-[#15803D] text-white font-medium py-3.5 rounded-xl text-sm shadow-sm transition-all flex items-center justify-center gap-2"  onClick={() => handlePlaceOrder(product)}>
                   <CartIcon />
                   <span>Place Order</span>
                 </button>

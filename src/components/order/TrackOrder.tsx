@@ -11,6 +11,12 @@ interface OrderStep {
   status: OrderStepStatus;
 }
 
+// ─── Props ────────────────────────────────────────────────────────────────────
+interface TrackOrderProps {
+  orderId?: string;
+  onBack?: () => void;
+}
+
 //  SVG Icons 
 const BackArrowIcon = () => (
   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -118,10 +124,7 @@ const StepIndicator = ({ status }: { status: OrderStepStatus }) => {
 const OrderStatusCard = () => (
   <div className="bg-white rounded-2xl border border-[#E9ECEF] p-6">
     <div className="flex items-center justify-between mb-6">
-      <h3
-        className="text-[#0F172A] font-bold text-base"
-        style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
-      >
+      <h3 className="text-[#0F172A] font-bold text-base" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
         Order Status
       </h3>
       <span className="text-[#16A34A] text-xs font-semibold bg-[#F0FDF4] px-3 py-1 rounded-full">
@@ -129,30 +132,22 @@ const OrderStatusCard = () => (
       </span>
     </div>
 
-    {/* Timeline */}
     <div className="relative">
       {ORDER_STEPS.map((step, index) => {
         const isLast = index === ORDER_STEPS.length - 1;
         const isPending = step.status === "pending";
-
         return (
           <div key={step.id} className="flex gap-4 relative">
-            {/* Connector line */}
             {!isLast && (
-              <div className="absolute left-4 top-8 bottom-0 w-0.5 -translate-x-1/2 z-0"
+              <div
+                className="absolute left-4 top-8 bottom-0 w-0.5 -translate-x-1/2 z-0"
                 style={{
-                  background: step.status === "completed"
-                    ? "#16A34A"
-                    : "#E9ECEF",
+                  background: step.status === "completed" ? "#16A34A" : "#E9ECEF",
                   height: "calc(100% - 8px)",
                 }}
               />
             )}
-
-            {/* Step dot */}
             <StepIndicator status={step.status} />
-
-            {/* Step content */}
             <div className={`pb-7 flex-1 ${isLast ? "pb-0" : ""}`}>
               <p className={`font-semibold text-sm ${isPending ? "text-[#9CA3AF]" : "text-[#0F172A]"}`}>
                 {step.label}
@@ -165,7 +160,6 @@ const OrderStatusCard = () => (
                   {step.timestamp}
                 </p>
               )}
-              {/* Pending placeholder */}
               {isPending && !step.timestamp && (
                 <div className="mt-1.5 h-3 w-32 bg-[#F3F4F6] rounded" />
               )}
@@ -180,13 +174,9 @@ const OrderStatusCard = () => (
 //  Order Summary Card 
 const OrderSummaryCard = () => (
   <div className="bg-white rounded-2xl border border-[#E9ECEF] p-6">
-    <h3
-      className="text-[#0F172A] font-bold text-base mb-5"
-      style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
-    >
+    <h3 className="text-[#0F172A] font-bold text-base mb-5" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
       Order Summary
     </h3>
-
     <div className="flex justify-between items-start mb-1">
       <div>
         <p className="text-[#0F172A] font-semibold text-sm">{ORDER_SUMMARY.productName}</p>
@@ -197,7 +187,6 @@ const OrderSummaryCard = () => (
         ₦{ORDER_SUMMARY.productPrice.toLocaleString()}
       </span>
     </div>
-
     <div className="border-t border-[#E9ECEF] mt-4 pt-4 space-y-2.5">
       <div className="flex justify-between text-sm">
         <span className="text-[#6B7280]">Product Price</span>
@@ -212,34 +201,25 @@ const OrderSummaryCard = () => (
         <span className="text-[#16A34A] font-bold text-base">₦{ORDER_SUMMARY.total.toLocaleString()}</span>
       </div>
     </div>
-
-    <p className="text-[#9CA3AF] text-xs mt-4">
-      Order placed on {ORDER_SUMMARY.placedAt}
-    </p>
+    <p className="text-[#9CA3AF] text-xs mt-4">Order placed on {ORDER_SUMMARY.placedAt}</p>
   </div>
 );
 
 // Payment Status Card 
 const PaymentStatusCard = () => (
   <div className="bg-[#16A34A] rounded-2xl p-6">
-    <h3
-      className="text-white font-bold text-base mb-4"
-      style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
-    >
+    <h3 className="text-white font-bold text-base mb-4" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
       Payment Status
     </h3>
-
     <div className="flex items-center gap-3 mb-3">
       <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center shrink-0">
         <ShieldCheckIcon />
       </div>
       <p className="text-white font-semibold text-sm">Payment held in secure escrow</p>
     </div>
-
     <p className="text-white/80 text-xs leading-relaxed">
       Your ₦{ORDER_SUMMARY.escrowAmount.toLocaleString()} payment is protected and will be released to the seller only after you confirm receipt.
     </p>
-
     <button className="w-full mt-4 bg-white/20 hover:bg-white/30 text-white font-semibold py-2.5 rounded-xl text-sm transition-colors border border-white/30">
       Payment held in secure escrow
     </button>
@@ -249,13 +229,9 @@ const PaymentStatusCard = () => (
 //  Need Help Card 
 const NeedHelpCard = () => (
   <div className="bg-white rounded-2xl border border-[#E9ECEF] p-6">
-    <h3
-      className="text-[#0F172A] font-bold text-base mb-4"
-      style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
-    >
+    <h3 className="text-[#0F172A] font-bold text-base mb-4" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
       Need Help?
     </h3>
-
     <div className="flex flex-col gap-3">
       <button className="w-full flex items-center justify-center gap-2 py-3 border border-[#E9ECEF] rounded-xl text-[#0F172A] text-sm font-medium hover:bg-gray-50 transition-colors">
         <MessageIcon />
@@ -269,31 +245,38 @@ const NeedHelpCard = () => (
   </div>
 );
 
-// Main TrackOrder Component 
-export default function TrackOrder() {
+// ─── Main TrackOrder Component ─────────────────────────────────────────────────
+export default function TrackOrder({ orderId, onBack }: TrackOrderProps) {
   const navigate = useNavigate();
+
+  const handleBack = () => {
+    if (onBack) {
+      // Called as a component inside OrderCard — use the callback
+      onBack();
+    } else {
+      // Called as a standalone route — use router navigation
+      navigate(-1);
+    }
+  };
+
+  const displayOrderId = orderId ?? ORDER_SUMMARY.orderId;
 
   return (
     <div className="w-full">
       {/* Page header */}
       <div className="flex items-center gap-3 mb-6">
         <button
-          onClick={() => navigate(-1)}
+          onClick={handleBack}
           className="p-2 rounded-xl border border-[#E9ECEF] bg-white text-[#6B7280] hover:text-[#0F172A] transition-colors"
           aria-label="Go back"
         >
           <BackArrowIcon />
         </button>
         <div>
-          <h1
-            className="text-[#0F172A] font-bold text-xl"
-            style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
-          >
+          <h1 className="text-[#0F172A] font-bold text-xl" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
             Track Order
           </h1>
-          <p className="text-[#6B7280] text-xs mt-0.5">
-            Order ID: {ORDER_SUMMARY.orderId}
-          </p>
+          <p className="text-[#6B7280] text-xs mt-0.5">Order ID: {displayOrderId}</p>
         </div>
       </div>
 
@@ -307,13 +290,10 @@ export default function TrackOrder() {
 
       {/* ── DESKTOP (two columns) ── */}
       <div className="hidden lg:grid lg:grid-cols-[1fr_380px] lg:gap-6 lg:items-start">
-        {/* Left column */}
         <div className="flex flex-col gap-5">
           <OrderStatusCard />
           <OrderSummaryCard />
         </div>
-
-        {/* Right column */}
         <div className="flex flex-col gap-5">
           <PaymentStatusCard />
           <NeedHelpCard />

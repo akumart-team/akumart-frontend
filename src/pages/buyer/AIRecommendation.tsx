@@ -11,6 +11,7 @@ import {
 } from "../../components/AIRecommendation/icons/index";
 import type { Listing, FilterPanelProps, MobileFilterDrawerProps } from "../../utils/types";
 
+
 // 1. Import your product overview page component here
 import { AIProductOverview } from "../../components/AIRecommendation/aiProductOverview";
 
@@ -393,6 +394,7 @@ export const AIRecommendation = () => {
       minQty === "" || parseInt(l.weight) >= parseInt(minQty);
     return matchSearch && matchCategory && matchState && matchQty;
   });
+  
 
 
   // CONDITION 1: FULL PAGE STATE ROUTER

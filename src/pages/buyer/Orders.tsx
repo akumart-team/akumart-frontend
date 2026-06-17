@@ -1,8 +1,8 @@
-
+import OrderList from "../../components/order/OrderList"
 
 export const Orders = () => {
   return (
-    <div>Orders</div>
+    <OrderList/>
   )
 }
 

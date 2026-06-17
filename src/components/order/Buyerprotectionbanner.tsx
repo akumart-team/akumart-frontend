@@ -1,6 +1,4 @@
-// ============================================================
-//  ORDER PAYMENT — Buyer Protection Banner
-// ============================================================
+
 import { AkumartLogoIcon, ShieldCheckIcon } from "./Icon";
 
 const PROTECTION_POINTS = [

@@ -85,15 +85,6 @@ export interface Listing {
 
 //  ORDERS 
 
-export type OrderStatus =
-  | "pending"
-  | "accepted"
-  | "declined"
-  | "in_transit"
-  | "delivered"
-  | "completed"
-  | "cancelled"
-  | "disputed";
 
 export interface Order {
   id: string;
@@ -269,4 +260,35 @@ export interface CardFormData {
 export interface OrderSuccessData {
   orderId: string;
   totalPaid: number;
+}
+
+
+export type OrderStatus = 'Inprogress' | 'Delivered' | 'Cancelled' | 'Pending';
+export type DeliveryStatus = 'Delivery Overdue' | 'On Track' | 'Delivered' | null;
+ 
+export interface Order {
+  id: string;
+  orderId: string;
+  productName: string;
+  productImage: string;
+  rating: number;
+  sellerName: string;
+  location: string;
+  distance: string;
+  weightAvailable: string;
+  deliveryInfo: string;
+  status: OrderStatus;
+  deliveryStatus: DeliveryStatus;
+  progressPercent: number;
+  productPrice: number;
+  transactionFeePercent: number;
+}
+
+export interface CheckoutProduct {
+  id: string;
+  productName: string;
+  productPrice: number;
+  sellerName: string;
+  quantity: string;
+  total: number;
 }
