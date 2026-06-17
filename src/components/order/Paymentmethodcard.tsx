@@ -1,11 +1,4 @@
-// ============================================================
-//  ORDER PAYMENT — Payment Method Card
-// ============================================================
-// NOTE: This is your existing component. The only change made here is
-// the import path for CardPaymentMethod / CardFormData, pointed at the
-// local ./types.ts used by OrderList. If your real project's type file
-// is named differently, just keep importing from your original path —
-// the shapes match what's defined in types.ts.
+
 
 import type { CardPaymentMethod, CardFormData } from '../../utils/types';
 import {

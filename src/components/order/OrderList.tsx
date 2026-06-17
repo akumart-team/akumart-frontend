@@ -5,14 +5,16 @@ import TrackOrder from './TrackOrder';
 import PaymentMethodCard from './Paymentmethodcard';
 import type { Order } from '../../utils/types';
 import type { CardPaymentMethod, CardFormData, CheckoutProduct } from '../../utils/types';
+import Plastics from "../../assets/imgs/plastics.png"
+import {SearchIcon} from "./Icon"
 
-// ─── Mock Data ────────────────────────────────────────────────────────────────
+//  Mock Data 
 const mockOrders = [
   {
     id: '1',
     orderId: 'ORD-1234567890',
     productName: 'PET Bottles',
-    productImage: '/imgs/pet-bottles.jpg',
+    productImage: Plastics,
     rating: 4.8,
     sellerName: 'EcoRecycle Ltd',
     location: 'Ikeja, Lagos',
@@ -29,7 +31,7 @@ const mockOrders = [
     id: '2',
     orderId: 'ORD-1234567890',
     productName: 'PET Bottles',
-    productImage: '/imgs/pet-bottles.jpg',
+    productImage: Plastics,
     rating: 4.8,
     sellerName: 'EcoRecycle Ltd',
     location: 'Ikeja, Lagos',
@@ -46,7 +48,7 @@ const mockOrders = [
     id: '3',
     orderId: 'ORD-1234567890',
     productName: 'PET Bottles',
-    productImage: '/imgs/pet-bottles.jpg',
+    productImage: Plastics,
     rating: 4.8,
     sellerName: 'EcoRecycle Ltd',
     location: 'Ikeja, Lagos',
@@ -61,14 +63,7 @@ const mockOrders = [
   },
 ] as unknown as Order[];
 
-// ─── Search Bar ───────────────────────────────────────────────────────────────
-const SearchIcon = () => (
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"
-    strokeLinecap="round" strokeLinejoin="round" className="text-[#9CA3AF]">
-    <circle cx="11" cy="11" r="8" />
-    <line x1="21" y1="21" x2="16.65" y2="16.65" />
-  </svg>
-);
+
 
 interface OrderSearchBarProps {
   value: string;
@@ -90,7 +85,7 @@ const OrderSearchBar: React.FC<OrderSearchBarProps> = ({ value, onChange }) => (
   </div>
 );
 
-// ─── Main Component ───────────────────────────────────────────────────────────
+//  Main Component 
 interface OrderListProps {
   orders?: Order[];
 }
@@ -105,13 +100,10 @@ const OrderList: React.FC<OrderListProps> = ({ orders = mockOrders }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [trackingOrderId, setTrackingOrderId] = useState<string | null>(null);
 
-  // If we arrived here via "Place Order" from AIProductOverview, open
-  // PaymentMethodCard immediately for that product.
   const [checkoutProductId, setCheckoutProductId] = useState<string | null>(
     navState.openPaymentFor ?? null
   );
   const checkoutProduct = navState.checkoutProduct ?? null;
-
   const [selectedPayment, setSelectedPayment] = useState<CardPaymentMethod>('mastercard');
   const [cardData, setCardData] = useState<CardFormData>({
     cardNumber: '',
@@ -186,7 +178,7 @@ const OrderList: React.FC<OrderListProps> = ({ orders = mockOrders }) => {
   return (
     <div className="flex flex-col h-full overflow-hidden bg-[#F9FAFB]">
       {/* Sticky search bar */}
-      <div className="flex-shrink-0 px-4 pt-4 pb-3 bg-[#F9FAFB] border-b border-[#F3F4F6]">
+      <div className="shrink-0 px-4 pt-2 pb-3 bg-[#F9FAFB] border-b border-[#F3F4F6]">
         <OrderSearchBar value={searchQuery} onChange={setSearchQuery} />
       </div>
 
