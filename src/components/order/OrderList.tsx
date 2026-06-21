@@ -1,12 +1,14 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import OrderCard from './OrderCard';
 import TrackOrder from './TrackOrder';
 import PaymentMethodCard from './Paymentmethodcard';
+import DisputeModal from './DisputeModal';
 import type { Order } from '../../utils/types';
-import type { CardPaymentMethod, CardFormData, CheckoutProduct } from '../../utils/types';
+import type { CheckoutProduct } from '../../utils/types';
 import Plastics from "../../assets/imgs/plastics.png"
 import {SearchIcon} from "./Icon"
+import { useOrderStore } from '../../store'; 
 
 //  Mock Data 
 const mockOrders = [
@@ -63,8 +65,6 @@ const mockOrders = [
   },
 ] as unknown as Order[];
 
-
-
 interface OrderSearchBarProps {
   value: string;
   onChange: (value: string) => void;
@@ -98,31 +98,40 @@ const OrderList: React.FC<OrderListProps> = ({ orders = mockOrders }) => {
   };
 
   const [searchQuery, setSearchQuery] = useState('');
-  const [trackingOrderId, setTrackingOrderId] = useState<string | null>(null);
 
-  const [checkoutProductId, setCheckoutProductId] = useState<string | null>(
-    navState.openPaymentFor ?? null
-  );
-  const checkoutProduct = navState.checkoutProduct ?? null;
-  const [selectedPayment, setSelectedPayment] = useState<CardPaymentMethod>('mastercard');
-  const [cardData, setCardData] = useState<CardFormData>({
-    cardNumber: '',
-    cardHolder: '',
-    expiry: '',
-    cvv: '',
-  });
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  //  Cross-cutting state now lives in useOrderStore ──
+  const trackingOrderId = useOrderStore((s) => s.trackingOrderId);
+  const setTrackingOrderId = useOrderStore((s) => s.setTrackingOrderId);
 
-  const handleCardChange = (field: keyof CardFormData, value: string) => {
-    setCardData((prev) => ({ ...prev, [field]: value }));
-  };
+  const disputeOrderId = useOrderStore((s) => s.disputeOrderId);
+  const setDisputeOrderId = useOrderStore((s) => s.setDisputeOrderId);
+
+  const checkoutProductId = useOrderStore((s) => s.checkoutProductId);
+  const checkoutProduct = useOrderStore((s) => s.checkoutProduct);
+  const selectedPayment = useOrderStore((s) => s.selectedPayment);
+  const cardData = useOrderStore((s) => s.cardData);
+  const isSubmitting = useOrderStore((s) => s.isSubmitting);
+
+  const startCheckout = useOrderStore((s) => s.startCheckout);
+  const endCheckout = useOrderStore((s) => s.endCheckout);
+  const setSelectedPayment = useOrderStore((s) => s.setSelectedPayment);
+  const setCardField = useOrderStore((s) => s.setCardField);
+  const setIsSubmitting = useOrderStore((s) => s.setIsSubmitting);
+
+  // If we arrived here via "Place Order" from AIProductOverview (navigation
+  // state), seed the store with that checkout product once on mount.
+  useEffect(() => {
+    if (navState.openPaymentFor && navState.checkoutProduct) {
+      startCheckout(navState.checkoutProduct);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handlePlaceOrder = () => {
     setIsSubmitting(true);
     // TODO: wire up real payment submission here.
     setTimeout(() => {
-      setIsSubmitting(false);
-      setCheckoutProductId(null); // back to the order list / success screen
+      endCheckout(); // resets isSubmitting, checkoutProductId, payment fields
     }, 1200);
   };
 
@@ -137,9 +146,11 @@ const OrderList: React.FC<OrderListProps> = ({ orders = mockOrders }) => {
     );
   }, [orders, searchQuery]);
 
-//   const handleTrack = (orderId: string) => {
-//     console.log('Track order:', orderId);
-//   };
+  const disputeOrder = orders.find((o) => o.id === disputeOrderId) ?? null;
+
+  const handleDownloadInvoice = (orderId: string) => {
+    console.log('Download invoice for:', orderId);
+  };
 
   // If checkout is active, render PaymentMethodCard in place of the list
   if (checkoutProductId !== null && checkoutProduct) {
@@ -149,7 +160,7 @@ const OrderList: React.FC<OrderListProps> = ({ orders = mockOrders }) => {
           selectedPayment={selectedPayment}
           onSelectPayment={setSelectedPayment}
           cardData={cardData}
-          onCardChange={handleCardChange}
+          onCardChange={setCardField}
           isSubmitting={isSubmitting}
           total={checkoutProduct.total}
           onPlaceOrder={handlePlaceOrder}
@@ -167,14 +178,6 @@ const OrderList: React.FC<OrderListProps> = ({ orders = mockOrders }) => {
     );
   }
 
-  const handleDispute = (orderId: string) => {
-    console.log('File dispute for:', orderId);
-  };
-
-  const handleDownloadInvoice = (orderId: string) => {
-    console.log('Download invoice for:', orderId);
-  };
-
   return (
     <div className="flex flex-col h-full overflow-hidden bg-[#F9FAFB]">
       {/* Sticky search bar */}
@@ -190,7 +193,7 @@ const OrderList: React.FC<OrderListProps> = ({ orders = mockOrders }) => {
               key={order.id}
               order={order}
               onTrack={setTrackingOrderId}
-              onDispute={handleDispute}
+              onDispute={setDisputeOrderId}
               onDownloadInvoice={handleDownloadInvoice}
             />
           ))
@@ -209,6 +212,25 @@ const OrderList: React.FC<OrderListProps> = ({ orders = mockOrders }) => {
           </div>
         )}
       </div>
+
+      {/* Dispute Modal Overlay — disputeOrderId now comes from useOrderStore,
+          so OrderCard's "File Dispute" button can set it from anywhere. */}
+      {disputeOrder && (
+        <DisputeModal
+          orderId={disputeOrder.orderId}
+          productName={disputeOrder.productName}
+          sellerName={disputeOrder.sellerName}
+          quantity={disputeOrder.weightAvailable}
+          productPrice={disputeOrder.productPrice}
+          total={disputeOrder.productPrice + Math.round(disputeOrder.productPrice * (disputeOrder.transactionFeePercent / 100))}
+          escrowAmount={disputeOrder.productPrice}
+          onClose={() => setDisputeOrderId(null)}
+          onSubmit={(data) => {
+            console.log('Dispute submitted for order', disputeOrder.id, data);
+            setDisputeOrderId(null);
+          }}
+        />
+      )}
     </div>
   );
 };

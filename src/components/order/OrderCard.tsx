@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import type { Order, OrderStatus, DeliveryStatus } from '../../utils/types';
 import { StarIcon,WeightIcon,MapPinIcon, DownloadIcon } from './Icon';
+import DisputeModal from './DisputeModal';
 
 
 //  Helpers
@@ -48,9 +49,9 @@ const ProgressBar: React.FC<{ percent: number }> = ({ percent }) => (
     <div className="flex justify-end mb-1">
       <span className="text-[10px] text-[#6B7280]">{percent}%</span>
     </div>
-    <div className="w-full h-1.25 bg-[#E5E7EB] rounded-full overflow-hidden">
+    <div className="w-full h-2 bg-[#E5E7EB] rounded-full overflow-hidden">
       <div
-        className="h-full bg-[#1A7A3C] rounded-full"
+        className="h-full bg-[#A3E635] rounded-full"
         style={{ width: `${percent}%` }}
       />
     </div>
@@ -125,7 +126,7 @@ const ProductInfo: React.FC<{ order: Order }> = ({ order }) => (
     <StatusBadges status={order.status} deliveryStatus={order.deliveryStatus ?? undefined} />
 
     {/* Product name */}
-    <h3 className="mt-2 text-[20px] font-semibold text-[#111827] leading-snug">
+    <h3 className="mt-2  text-[20px] font-semibold text-[#111827] leading-snug">
       {order.productName}
     </h3>
 
@@ -140,25 +141,25 @@ const ProductInfo: React.FC<{ order: Order }> = ({ order }) => (
     {/* Location */}
     <div className="flex items-center gap-1.5 mt-1.5 text-[#6B7280]">
       <MapPinIcon />
-      <span className="text-[15px]">{order.location}</span>
+      <span className="text-[12px] xl:text-[15px]">{order.location}</span>
       <span className="text-[15px] font-semibold text-[#1A7A3C]">• {order.distance}</span>
     </div>
 
     {/* Weight */}
     <div className="flex items-center gap-1.5 mt-1.5 text-[#6B7280]">
       <WeightIcon />
-      <span className="text-[15px]">{order.weightAvailable}</span>
+      <span className="text-[13px] xl:text-[15px]">{order.weightAvailable}</span>
     </div>
 
     {/* Order ID */}
-    <p className="mt-2 text-[15px] text-[#6B7280]">
+    <p className="mt-2 text-[13px] xl:text-[15px] text-[#6B7280]">
       <span className="text-[#374151] font-medium">Order ID</span>
       {' '}
       <span>{order.orderId}</span>
     </p>
 
     {/* Delivery Information */}
-    <p className="mt-0.5 text-[15px] text-[#6B7280]">
+    <p className="mt-0.5 text-[13px] xl:text-[15px] text-[#6B7280]">
       <span className="text-[#374151] font-medium">Delivery Information : </span>
       <span>{order.deliveryInfo}</span>
     </p>
@@ -179,15 +180,27 @@ interface OrderCardProps {
 const OrderCard: React.FC<OrderCardProps> = ({ order, onTrack, onDispute, onDownloadInvoice }) => {
   const showDispute = order.deliveryStatus === 'Delivery Overdue' || order.status === 'Cancelled';
 
+  const [isDisputeModalOpen, setIsDisputeModalOpen] = useState(false);
+
   const fallbackImg = 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80';
 
+  const fee = Math.round(order.productPrice * (order.transactionFeePercent / 100));
+const total = order.productPrice + fee;
+const escrowAmount = order.productPrice;
+
+const handleDisputeSubmit = (data: { reason: string; description: string; image: File | null }) => {
+  console.log('Dispute submitted for order', order.id, data);
+  onDispute(order.id);
+};
+
   return (
+    <>
     <div className="bg-white rounded-xl border border-[#E5E7EB] overflow-hidden">
 
       {/*  Desktop  */}
-      <div className="hidden md:flex min-h-52.5">
+      <div className="hidden lg:flex min-h-52.5">
         {/* Image */}
-        <div className="shrink-0 w-80 p-3">
+        <div className="shrink-0 w-70 xl:w-80 p-3">
           <img
             src={order.productImage}
             alt={order.productName}
@@ -202,7 +215,7 @@ const OrderCard: React.FC<OrderCardProps> = ({ order, onTrack, onDispute, onDown
         </div>
 
         {/* Pricing + Actions — right column */}
-        <div className="shrink-0 w-57.5 px-5 py-4 border-l border-[#F3F4F6] flex flex-col justify-between">
+        <div className="shrink-0 md:w-57.5 xl:w-70 px-5 py-4 border-l border-[#F3F4F6] flex flex-col justify-between">
           <PricingBlock
             productPrice={order.productPrice}
             transactionFeePercent={order.transactionFeePercent}
@@ -210,16 +223,16 @@ const OrderCard: React.FC<OrderCardProps> = ({ order, onTrack, onDispute, onDown
           <ActionButtons
             showDispute={showDispute}
             onTrack={() => onTrack(order.id)}
-            onDispute={() => onDispute(order.id)}
+            onDispute={() => setIsDisputeModalOpen(true)}
             onDownload={() => onDownloadInvoice(order.id)}
           />
         </div>
       </div>
 
       {/* ── Mobile ── */}
-      <div className="md:hidden">
+      <div className="lg:hidden  ">
         {/* Image */}
-        <div className="w-full h-50">
+        <div className="w-full h-60  ">
           <img
             src={order.productImage}
             alt={order.productName}
@@ -250,6 +263,20 @@ const OrderCard: React.FC<OrderCardProps> = ({ order, onTrack, onDispute, onDown
       </div>
 
     </div>
+    {isDisputeModalOpen && (
+      <DisputeModal
+        orderId={order.orderId}
+        productName={order.productName}
+        sellerName={order.sellerName}
+        quantity={order.weightAvailable}
+        productPrice={order.productPrice}
+        total={total}
+        escrowAmount={escrowAmount}
+        onClose={() => setIsDisputeModalOpen(false)}
+        onSubmit={handleDisputeSubmit}
+      />
+    )}
+    </>
   );
 };
 
