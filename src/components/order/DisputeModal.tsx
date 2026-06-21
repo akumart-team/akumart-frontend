@@ -155,7 +155,7 @@ const DisputeModal: React.FC<DisputeModalProps> = ({
   //  Main dispute form 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 px-4 py-6">
-      <div className="bg-white rounded-2xl w-full max-w-140 max-h-[90vh] overflow-y-auto">
+      <div className="bg-white rounded-2xl w-full max-w-140 max-h-[90vh] overflow-y-auto hide-scrollbar ">
         {/* Header */}
         <div className="bg-[#1A7A3C] rounded-t-2xl px-6 py-5 flex items-center gap-3">
           <button
