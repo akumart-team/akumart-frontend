@@ -75,11 +75,11 @@ export const BuyerDashboard = () => {
         </p>
       </div>
 
-      <div className="flex flex-col-reverse lg:grid lg:grid-cols-3 gap-6 items-start ">
+      <div className="flex flex-col-reverse lg:grid lg:grid-cols-2 xl:grid-cols-3 gap-6 items-start ">
         {/*  LEFT MAIN COLUMN  */}
         <div className="lg:col-span-2 w-full space-y-6 p-3">
           {/* 2x2 Metrics Blocks Grid */}
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-2  gap-4">
             {BUYER_METRICS.map((metric, idx) => (
               <div
                 key={idx}
@@ -101,7 +101,7 @@ export const BuyerDashboard = () => {
           </div>
 
           {/* Feed and Saved Items */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {/* Recent Activity Feed Card Component */}
             <div className="bg-white border border-[#E9ECEF] p-5 rounded-2xl shadow-sm flex flex-col justify-between">
               <div>
