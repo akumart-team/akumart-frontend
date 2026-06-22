@@ -233,6 +233,39 @@ export interface MobileFilterDrawerProps extends FilterPanelProps {
 
 export type CardPaymentMethod = "mastercard" | "visa" | "bank";
 
+export interface CardFormData {
+  cardNumber: string;
+  cardHolder: string;
+  expiry: string;
+  cvv: string;
+}
+ 
+// Delivery
+export type DeliveryOption = "delivery" | "self_pickup";
+ 
+export interface DeliveryFormData {
+  streetAddress: string;
+  city: string;
+  state: string;
+  postalCode: string;
+}
+ 
+// Order
+export interface OrderData {
+  productName: string;
+  seller: string;
+  quantity: string;
+  productPrice: number;
+  transactionFee: number;
+  total: number;
+  orderId: string;
+}
+ 
+export interface OrderSuccessData {
+  orderId: string;
+  totalPaid: number;
+}
+
 export interface OrderData {
   productName: string;
   seller: string;

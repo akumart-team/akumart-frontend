@@ -50,7 +50,7 @@ export const useAuthStore = create<AuthStore>()(
   )
 );
 
-// UI STORE ─
+// UI STORE 
 interface UIStore {
   isLoading: boolean;
   activeModal: string | null;

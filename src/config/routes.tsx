@@ -13,6 +13,7 @@ import {
   AIRecommendation,
   MarketPlace,
   Settings,
+  OrderPayment,
 } from "../pages";
 import { ScrollToTop } from "../components/layout/ScrollToTop";
 import { Header } from "../components/layout/Header";
@@ -105,6 +106,7 @@ export function Routes() {
             { path: "settings", element: <Settings /> },
             { path: "AIRecomendation", element: <AIRecommendation /> },
             { path: "marketplace", element: <MarketPlace /> },
+            { path: "checkout", element: <OrderPayment /> }
           ],
         },
       ],

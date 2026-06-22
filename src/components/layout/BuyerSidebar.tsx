@@ -22,6 +22,7 @@ export default function BuyerSidebar({ onClose }: BuyerSidebarProps) {
     { name: "AI Recommendations", path: "/buyer/AIRecomendation", icon: Ai },
     { name: "Browse Marketplace", path: "/buyer/marketplace", icon: Search },
     { name: "Orders", path: "/buyer/orders", icon: Cart },
+    { name: "Order Checkout", path: "/buyer/checkout", icon: Cart },
     { name: "Settings", path: "/buyer/settings", icon: Settings },
   ];
 

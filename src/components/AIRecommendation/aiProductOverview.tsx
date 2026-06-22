@@ -62,7 +62,7 @@ const handlePlaceOrder = (product: {
   quantity: string;
   total: number; // ← added
 }) => {
-  navigate('/buyer/orders', {
+  navigate('/buyer/checkout', {
     state: {
       checkoutProduct: product,
       openPaymentFor: product.id,
