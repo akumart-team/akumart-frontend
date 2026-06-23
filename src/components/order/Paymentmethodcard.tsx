@@ -50,12 +50,12 @@ const PaymentMethodCard = ({
       <p className="text-[#6B7280] text-xs mb-5">Select Payment Method</p>
 
       {/* Card type buttons */}
-      <div className="grid grid-cols-2 gap-3 mb-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4">
         {/* Mastercard */}
         <button
           type="button"
           onClick={() => onSelectPayment("mastercard")}
-          className={`flex items-start gap-3 p-4 rounded-xl border text-left transition-all ${
+          className={` flex items-start gap-3 p-4 rounded-xl border text-left transition-all ${
             selectedPayment === "mastercard"
               ? "border-[#16A34A] bg-[#F0FDF4]"
               : "border-[#E9ECEF] bg-white hover:border-gray-300"

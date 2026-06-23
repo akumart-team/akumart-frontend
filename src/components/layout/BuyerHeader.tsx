@@ -41,6 +41,12 @@ export default function BuyerHeader({ onMenuToggle }: BuyerHeaderProps) {
         subtitle:
           "Get a quick overview of your listings, orders, sales, and earnings.",
       };
+       if (path.includes("/buyer/checkout"))
+      return {
+        title: "Check out ",
+        subtitle:
+          "Check out your listings, orders, sales, and earnings.",
+      };
     if (path.includes("/buyer/settings"))
       return {
         title: "Settings",
