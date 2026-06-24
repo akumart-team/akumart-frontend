@@ -11,7 +11,7 @@ import {
   SellerDashboard,
   Orders,
   AIRecommendation,
-  MarketPlace,
+  
   Settings,
   OrderPayment,
 } from "../pages";
@@ -105,7 +105,7 @@ export function Routes() {
             { path: "orders", element: <Orders /> },
             { path: "settings", element: <Settings /> },
             { path: "AIRecomendation", element: <AIRecommendation /> },
-            { path: "marketplace", element: <MarketPlace /> },
+         
             { path: "checkout", element: <OrderPayment /> }
           ],
         },
