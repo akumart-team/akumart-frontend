@@ -50,7 +50,7 @@ const PaymentMethodCard = ({
       <p className="text-[#6B7280] text-xs mb-5">Select Payment Method</p>
 
       {/* Card type buttons */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4">
+      <div className="grid grid-cols-1 xl:grid-cols-2 gap-3 mb-4">
         {/* Mastercard */}
         <button
           type="button"
@@ -61,7 +61,7 @@ const PaymentMethodCard = ({
               : "border-[#E9ECEF] bg-white hover:border-gray-300"
           }`}
         >
-          <div className="shrink-0 mt-0.5">
+          <div className="shrink-0 mt-0.5 ">
             <MastercardIcon />
           </div>
           <p className="text-[#6B7280] text-xs leading-relaxed">

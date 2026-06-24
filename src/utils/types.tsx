@@ -33,17 +33,23 @@ export interface User {
   phone: string;
   state: string;
   city: string;
+  companyAddress:string;
   businessType: BusinessType;
   wasteCategories: WasteCategory[];
   memberSince: string;
   isEmailVerified: boolean;
   avatarUrl?: string;
+  phoneNumber?: string;
+  profileStatus?: string;
+  paymentMethod?: string;
+  cardHolderName?: string;
   // Seller-only
   rating?: number;
   reviewCount?: number;
   totalTransactions?: number;
   // Buyer-only
   productionDescription?: string;
+  
 }
 
 // Add these to your existing utils/types.ts file
@@ -324,4 +330,36 @@ export interface CheckoutProduct {
   sellerName: string;
   quantity: string;
   total: number;
+}
+
+
+// settings
+export type ProfileStatus = 'Public' | 'Private';
+export type PaymentMethodType = 'mastercard' | 'paypal' | 'visa';
+export interface AccountFormState {
+  first_name: string;
+  Last_name: string;
+  email: string;
+  phoneNumber: string;
+  profileStatus: ProfileStatus;
+}
+
+export interface AddressFormState {
+  companyAddress: string;
+  city: string;
+  state: string;
+}
+
+export interface PasswordFormState {
+  currentPassword: string;
+  newPassword: string;
+  confirmPassword: string;
+}
+
+export interface PaymentFormState {
+  method: PaymentMethodType;
+  cardNumber: string;
+  cardHolderName: string;
+  expirationDate: string;
+  cvv: string;
 }

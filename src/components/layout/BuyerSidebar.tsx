@@ -4,7 +4,7 @@ import { NavLink,  } from "react-router-dom";
 import Dashboard from "../../assets/icons/dashboard.png"
 import Settings from "../../assets/icons/settings.png"
 import Cart from "../../assets/icons/cart.png"
-import Search from "../../assets/icons/search.png"
+
 import Ai from "../../assets/icons/ai.png"
 import Logo from "../../assets/imgs/logo.png"
 
@@ -20,7 +20,7 @@ export default function BuyerSidebar({ onClose }: BuyerSidebarProps) {
     path: "/buyer/dashboard", 
     icon: Dashboard },
     { name: "AI Recommendations", path: "/buyer/AIRecomendation", icon: Ai },
-    { name: "Browse Marketplace", path: "/buyer/marketplace", icon: Search },
+    
     { name: "Orders", path: "/buyer/orders", icon: Cart },
     { name: "Order Checkout", path: "/buyer/checkout", icon: Cart },
     { name: "Settings", path: "/buyer/settings", icon: Settings },
