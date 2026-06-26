@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState , useEffect,useRef} from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -158,6 +158,9 @@ export const Register: React.FC = () => {
   const [watchedPassword, setWatchedPassword] = useState("");
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
+  const [roleDropdownOpen, setRoleDropdownOpen] = useState(false);
+  const roleDropdownRef = useRef<HTMLDivElement>(null);
+
 
   const {
     register: registerStep2,
@@ -245,6 +248,16 @@ export const Register: React.FC = () => {
     }
   };
 
+  useEffect(() => {
+  const close = (e: MouseEvent) => {
+    if (roleDropdownRef.current && !roleDropdownRef.current.contains(e.target as Node)) {
+      setRoleDropdownOpen(false);
+    }
+  };
+  document.addEventListener('mousedown', close);
+  return () => document.removeEventListener('mousedown', close);
+}, []);
+
   return (
     <>
       {/* Success Modal */}
@@ -328,14 +341,43 @@ export const Register: React.FC = () => {
                   <label className="block text-xs font-semibold text-gray-500 mb-2 uppercase tracking-wider">
                     User Type
                   </label>
-                  <select
-                    value={role}
-                    onChange={(e) => setRole(e.target.value as UserRole)}
-                    className="w-full border border-gray-200 rounded-xl p-3.5 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500"
-                  >
-                    <option value="buyer">Buyer</option>
-                    <option value="seller">Seller</option>
-                  </select>
+                 <div className="relative w-full">
+{/* Replace your <select> with this */}
+<div ref={roleDropdownRef} className="relative w-full">
+  <button
+    type="button"
+    onClick={() => setRoleDropdownOpen((prev) => !prev)}
+    className={`w-full flex items-center justify-between gap-3 rounded-xl border-2 bg-white px-4 py-3.5 sm:py-3 text-left text-base sm:text-sm font-medium text-gray-900 transition-all duration-150 ${
+      roleDropdownOpen ? 'border-emerald-500 ring-4 ring-emerald-500/15' : 'border-gray-200 hover:border-emerald-300'
+    }`}
+  >
+    <span>{role === 'buyer' ? 'Buyer' : 'Seller'}</span>
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={`text-emerald-600 transition-transform duration-200 ${roleDropdownOpen ? 'rotate-180' : ''}`}>
+      <polyline points="6 9 12 15 18 9" />
+    </svg>
+  </button>
+
+  {roleDropdownOpen && (
+    <div className="absolute left-0 right-0 top-full mt-2 z-20 bg-white border-2 border-emerald-100 rounded-xl shadow-lg overflow-hidden">
+      {(['buyer', 'seller'] as UserRole[]).map((opt) => (
+        <button
+          key={opt}
+          type="button"
+          onClick={() => { setRole(opt); setRoleDropdownOpen(false); }}
+          className={`w-full text-left px-4 py-3 text-base sm:text-sm font-medium transition-colors duration-150 ${
+            role === opt ? 'bg-[#16A34A] text-white' : 'text-gray-900 '
+          }`}
+        >
+          {opt === 'buyer' ? 'Buyer' : 'Seller'}
+        </button>
+      ))}
+    </div>
+  )}
+</div>
+
+  {/* Custom chevron — replaces the native arrow, which looks different on every platform */}
+  
+</div>
                 </div>
                 <button
                   type="submit"

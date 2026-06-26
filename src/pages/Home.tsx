@@ -18,6 +18,7 @@ import Earth from "../assets/imgs/earth.png"
 import Mockup from "../assets/imgs/mockup.png"
 import Mobilemockup from "../assets/imgs/mobile.png"
 
+
 interface StatCardProps {
   number: string;
   label: string;
@@ -38,7 +39,7 @@ interface Category {
   name: string;
   image: string;
 }
-
+ 
 interface FeatureCard {
   id: number;
   title: string;
@@ -320,7 +321,7 @@ export const Home = () => {
       {/* --- */}
 
       {/* SECTION 3: PROBLEM AND SOLUTION */}
-      <section className=" mx-auto px-6 py-12 md:px-16 md:py-20">
+      <section id="problem" className=" mx-auto px-6 py-12 md:px-16 md:py-20">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-stretch  ">
           {/* --- PROBLEM SIDE (Narrower Width) --- */}
           <div className="md:col-span-5 bg-[#F9FAFB] border border-gray-100 rounded-3xl p-8 md:p-12 flex flex-col justify-start">
