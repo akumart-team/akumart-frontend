@@ -25,7 +25,7 @@ export const Header = () => {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300  ${
         isScrolled
           ? "bg-white shadow-md py-3"
           : "bg-white/95 backdrop-blur-sm py-4"
@@ -34,7 +34,7 @@ export const Header = () => {
       <div className="w-full mx-auto px-6  md:px-16  ">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-2 shrink-0 ">
+          <Link to="/" className="flex items-center gap-2 shrink-0 w-30 md:w-50 ">
           <img src={Logo} alt="logo" />
           </Link>
 
