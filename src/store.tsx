@@ -1,13 +1,14 @@
 import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
-import type { User, UINotification } from "./utils/types";
+import type { User, UINotification, CardPaymentMethod ,CardFormData,CheckoutProduct} from "./utils/types";
 
-// ─── AUTH STORE ───────────────────────────────────────────
+//  AUTH STORE 
 interface AuthStore {
   user: User | null;
   token: string | null;
+  refreshToken: string | null;       
   isAuthenticated: boolean;
-  setUser: (user: User, token: string) => void;
+  setUser: (user: User, token: string, refreshToken: string) => void;
   logout: () => void;
   updateUser: (updates: Partial<User>) => void;
 }
@@ -17,9 +18,20 @@ export const useAuthStore = create<AuthStore>()(
     (set) => ({
       user: null,
       token: null,
+      refreshToken: null,
       isAuthenticated: false,
-      setUser: (user, token) => set({ user, token, isAuthenticated: true }),
-      logout: () => set({ user: null, token: null, isAuthenticated: false }),
+
+      setUser: (user, token, refreshToken) =>
+        set({ user, token, refreshToken, isAuthenticated: true }),
+
+      logout: () =>
+        set({
+          user: null,
+          token: null,
+          refreshToken: null,
+          isAuthenticated: false,
+        }),
+
       updateUser: (updates) =>
         set((state) => ({
           user: state.user ? { ...state.user, ...updates } : null,
@@ -31,13 +43,14 @@ export const useAuthStore = create<AuthStore>()(
       partialize: (state) => ({
         user: state.user,
         token: state.token,
+        refreshToken: state.refreshToken,
         isAuthenticated: state.isAuthenticated,
       }),
     }
   )
 );
 
-// ─── UI STORE ─────────────────────────────────────────────
+// UI STORE 
 interface UIStore {
   isLoading: boolean;
   activeModal: string | null;
@@ -65,3 +78,65 @@ export const useUIStore = create<UIStore>()((set) => ({
     })),
   clearNotifications: () => set({ notifications: [] }),
 }));
+
+
+interface OrderStore {
+  // Track Order
+  trackingOrderId: string | null;
+  setTrackingOrderId: (id: string | null) => void;
+ 
+  // File Dispute
+  disputeOrderId: string | null;
+  setDisputeOrderId: (id: string | null) => void;
+ 
+  // Checkout / Payment
+  checkoutProductId: string | null;
+  checkoutProduct: CheckoutProduct | null;
+  selectedPayment: CardPaymentMethod;
+  cardData: CardFormData;
+  isSubmitting: boolean;
+ 
+  startCheckout: (product: CheckoutProduct) => void;
+  endCheckout: () => void;
+  setSelectedPayment: (method: CardPaymentMethod) => void;
+  setCardField: (field: keyof CardFormData, value: string) => void;
+  setIsSubmitting: (value: boolean) => void;
+}
+ 
+export const useOrderStore = create<OrderStore>()((set) => ({
+  // Track Order
+  trackingOrderId: null,
+  setTrackingOrderId: (id) => set({ trackingOrderId: id }),
+ 
+  // File Dispute
+  disputeOrderId: null,
+  setDisputeOrderId: (id) => set({ disputeOrderId: id }),
+ 
+  // Checkout / Payment
+  checkoutProductId: null,
+  checkoutProduct: null,
+  selectedPayment: "mastercard",
+  cardData: { cardNumber: "", cardHolder: "", expiry: "", cvv: "" },
+  isSubmitting: false,
+ 
+  startCheckout: (product) =>
+    set({ checkoutProductId: product.id, checkoutProduct: product }),
+ 
+  endCheckout: () =>
+    set({
+      checkoutProductId: null,
+      checkoutProduct: null,
+      selectedPayment: "mastercard",
+      cardData: { cardNumber: "", cardHolder: "", expiry: "", cvv: "" },
+      isSubmitting: false,
+    }),
+ 
+  setSelectedPayment: (method) => set({ selectedPayment: method }),
+ 
+  setCardField: (field, value) =>
+    set((state) => ({ cardData: { ...state.cardData, [field]: value } })),
+ 
+  setIsSubmitting: (value) => set({ isSubmitting: value }),
+}));
+
+

@@ -27,22 +27,39 @@ export type WasteCategory =
 export interface User {
   id: string;
   role: UserRole;
-  fullName: string;
+  first_name: string;     
+  last_name: string; 
   email: string;
   phone: string;
   state: string;
   city: string;
+  companyAddress:string;
   businessType: BusinessType;
   wasteCategories: WasteCategory[];
   memberSince: string;
   isEmailVerified: boolean;
   avatarUrl?: string;
+  phoneNumber?: string;
+  profileStatus?: string;
+  paymentMethod?: string;
+  cardHolderName?: string;
   // Seller-only
   rating?: number;
   reviewCount?: number;
   totalTransactions?: number;
   // Buyer-only
   productionDescription?: string;
+  
+}
+
+// Add these to your existing utils/types.ts file
+
+export interface LoginResponse {
+  access_token: string;
+  refresh_token: string;
+  token_type: string;
+  expires_in: number;
+  user: User; 
 }
 
 export interface AuthState {
@@ -59,40 +76,21 @@ export type ListingStatus = "active" | "paused" | "sold_out" | "deleted";
 
 export interface Listing {
   id: string;
-  sellerId: string;
-  sellerName: string;
-  sellerRating?: number;
+  category: string;
   title: string;
-  description: string;
-  categories: WasteCategory[];
-  weightKg: number;
-  priceMin: number;
-  priceMax: number;
+  rating: number;
+  company: string;
   location: string;
-  state: string;
-  city: string;
-  availableFrom: string;
-  availableTo: string;
-  photos: string[];
-  logisticsPreference: LogisticsPreference;
-  status: ListingStatus;
-  createdAt: string;
-  updatedAt: string;
-  trustLabel?: "Highly Active" | "Reliable Seller" | "New on Platform";
-  trustSummary?: string;
+  distance: string;
+  weight: string;
+  price: number;
+  pricePerKg: number;
+  availability: "Immediate" | "Scheduled";
+  isBookmarked: boolean;
 }
 
 //  ORDERS 
 
-export type OrderStatus =
-  | "pending"
-  | "accepted"
-  | "declined"
-  | "in_transit"
-  | "delivered"
-  | "completed"
-  | "cancelled"
-  | "disputed";
 
 export interface Order {
   id: string;
@@ -218,4 +216,150 @@ export interface UIState {
   isLoading: boolean;
   activeModal: string | null;
   notifications: UINotification[];
+}
+
+export interface FilterPanelProps {
+  selectedCategory: string;
+  setSelectedCategory: (v: string) => void;
+  state: string;
+  setState: (v: string) => void;
+  minQty: string;
+  setMinQty: (v: string) => void;
+  sortBy: string;
+  setSortBy: (v: string) => void;
+  onReset: () => void;
+}
+export interface MobileFilterDrawerProps extends FilterPanelProps {
+  isOpen: boolean;
+  onClose: () => void;
+}
+
+//  ORDER PAYMENT — Types
+
+
+export type CardPaymentMethod = "mastercard" | "visa" | "bank";
+
+export interface CardFormData {
+  cardNumber: string;
+  cardHolder: string;
+  expiry: string;
+  cvv: string;
+}
+ 
+// Delivery
+export type DeliveryOption = "delivery" | "self_pickup";
+ 
+export interface DeliveryFormData {
+  streetAddress: string;
+  city: string;
+  state: string;
+  postalCode: string;
+}
+ 
+// Order
+export interface OrderData {
+  productName: string;
+  seller: string;
+  quantity: string;
+  productPrice: number;
+  transactionFee: number;
+  total: number;
+  orderId: string;
+}
+ 
+export interface OrderSuccessData {
+  orderId: string;
+  totalPaid: number;
+}
+
+export interface OrderData {
+  productName: string;
+  seller: string;
+  quantity: string;
+  productPrice: number;
+  transactionFee: number;
+  total: number;
+  orderId: string;
+}
+
+export interface DeliveryFormData {
+  streetAddress: string;
+  city: string;
+  state: string;
+  postalCode: string;
+}
+
+export interface CardFormData {
+  cardNumber: string;
+  cardHolder: string;
+  expiry: string;
+  cvv: string;
+}
+
+export interface OrderSuccessData {
+  orderId: string;
+  totalPaid: number;
+}
+
+
+export type OrderStatus = 'Inprogress' | 'Delivered' | 'Cancelled' | 'Pending';
+export type DeliveryStatus = 'Delivery Overdue' | 'On Track' | 'Delivered' | null;
+ 
+export interface Order {
+  id: string;
+  orderId: string;
+  productName: string;
+  productImage: string;
+  rating: number;
+  sellerName: string;
+  location: string;
+  distance: string;
+  weightAvailable: string;
+  deliveryInfo: string;
+  status: OrderStatus;
+  deliveryStatus: DeliveryStatus;
+  progressPercent: number;
+  productPrice: number;
+  transactionFeePercent: number;
+}
+
+export interface CheckoutProduct {
+  id: string;
+  productName: string;
+  productPrice: number;
+  sellerName: string;
+  quantity: string;
+  total: number;
+}
+
+
+// settings
+export type ProfileStatus = 'Public' | 'Private';
+export type PaymentMethodType = 'mastercard' | 'paypal' | 'visa';
+export interface AccountFormState {
+  first_name: string;
+  Last_name: string;
+  email: string;
+  phoneNumber: string;
+  profileStatus: ProfileStatus;
+}
+
+export interface AddressFormState {
+  companyAddress: string;
+  city: string;
+  state: string;
+}
+
+export interface PasswordFormState {
+  currentPassword: string;
+  newPassword: string;
+  confirmPassword: string;
+}
+
+export interface PaymentFormState {
+  method: PaymentMethodType;
+  cardNumber: string;
+  cardHolderName: string;
+  expirationDate: string;
+  cvv: string;
 }

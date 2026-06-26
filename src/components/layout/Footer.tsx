@@ -27,11 +27,11 @@ export const Footer = () => {
       
 
       {/* Links Section */}
-      <div className=" mx-auto px-4 sm:px-6 lg:px-12 py-12">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+      <div className=" mx-auto px-4 sm:px-6  py-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Brand */}
           <div className="col-span-1">
-            <Link to="/" className="flex items-center gap-2 mb-4">
+            <Link to="/" className="flex items-center gap-2  w-30 md:w-50 ">
               <img src={Logo} alt="logo" />
             </Link>
           

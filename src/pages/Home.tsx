@@ -15,6 +15,9 @@ import Paper from "../assets/imgs/paper.png";
 
 import Recycle from "../assets/imgs/recyle.png"
 import Earth from "../assets/imgs/earth.png"
+import Mockup from "../assets/imgs/mockup.png"
+import Mobilemockup from "../assets/imgs/mobile.png"
+
 
 interface StatCardProps {
   number: string;
@@ -36,7 +39,7 @@ interface Category {
   name: string;
   image: string;
 }
-
+ 
 interface FeatureCard {
   id: number;
   title: string;
@@ -260,18 +263,18 @@ export const Home = () => {
   ];
 
   const buyerSteps: StepProps[] = [
-    { iconSrc: List, text: "List Waste Materials" },
-    { iconSrc: People, text: "Connect With Buyers" },
-    { iconSrc: Paid, text: "Get Paid Securely" },
+    { iconSrc: List, text: "Secure reliable supply." },
+    { iconSrc: People, text: "Quality Materials." },
+    { iconSrc: Paid, text: "Reduce production costs." },
   ];
 
   return (
-    <div className="w-full bg-[#FAFAFA] font-['Plus_Jakarta_Sans',sans-serif] antialiased">
+    <div className="w-full bg-white font-['Plus_Jakarta_Sans',sans-serif] antialiased">
       {/* SECTION 1: HERO */}
 
-      <section className=" mx-auto px-6 pt-25 pb-8 md:px-16 md:pt-35 md:pb-20 flex flex-col md:flex-row items-center justify-between gap-10">
+      <section className=" mx-auto px-10 pt-25   pb-8 md:px-16 md:pt-30 md:pb-20 flex flex-col md:flex-row items-center justify-between gap-6">
         <div className="w-full md:w-1/2 flex flex-col items-start text-left">
-          <h1 className="text-[#0D2B1E] text-[24px] md:text-[34px] lg:text-[64px] font-extrabold leading-7.5 md:leading-10 lg:leading-18 tracking-[0.92px] mb-6">
+          <h1 className="text-[#0D2B1E] text-[24px] md:text-[30px] lg:text-[40px] xl:text-[60px] font-extrabold leading-7.5 md:leading-10 lg:leading-15 xl:leading-17 tracking-[0.92px] mb-6">
             The <span className="text-[#A3E635]">B2B</span> Marketplace for
             Waste and Recycled Materials
           </h1>
@@ -281,7 +284,7 @@ export const Home = () => {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
             <button className="bg-[#16A34A] hover:bg-[#059669] text-white font-semibold py-4 px-6 rounded-xl transition duration-200 text-center">
-              <Link to="/signup">Browse Marketplace</Link>
+              <Link to="/register">Browse Marketplace</Link>
             </button>
             <button className="bg-[#E5E7EB] hover:bg-[#D1D5DB] text-[#374151] font-semibold py-4 px-6 rounded-xl transition duration-200 text-center">
               <Link to="/register">Get Started</Link>
@@ -296,7 +299,7 @@ export const Home = () => {
       </section>
 
       {/* SECTION 2: STATISTICS */}
-      <section className=" mx-auto px-6 py-6 md:px-16 ">
+      <section className=" mx-auto px-10 py-6 md:px-16 ">
         {/* Mobile: Horizontal scrollable track | Desktop: Static Grid Layout */}
         <div className="flex overflow-x-auto  md:grid md:grid-cols-2 lg:grid-cols-4 gap-6 pb-4 md:pb-0 scrollbar-hide snap-x snap-mandatory  scrollbar-none [&::-webkit-scrollbar]:hidden">
           {stats.map((stat, index) => (
@@ -318,7 +321,7 @@ export const Home = () => {
       {/* --- */}
 
       {/* SECTION 3: PROBLEM AND SOLUTION */}
-      <section className=" mx-auto px-6 py-12 md:px-16 md:py-20">
+      <section id="problem" className=" mx-auto px-6 py-12 md:px-16 md:py-20">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-stretch  ">
           {/* --- PROBLEM SIDE (Narrower Width) --- */}
           <div className="md:col-span-5 bg-[#F9FAFB] border border-gray-100 rounded-3xl p-8 md:p-12 flex flex-col justify-start">
@@ -487,7 +490,7 @@ export const Home = () => {
       </section>
 
       {/* Waste category*/}
-      <section className="w-full py-12 px-4 md:px-8 bg-white text-center select-none">
+      <section className="w-full py-12 px-6 md:px-8 bg-white text-center select-none">
         {/* Header Section */}
         <div className="max-w-2xl mx-auto mb-8">
           <h2 className="text-3xl md:text-[40px] font-bold text-[#1E293B] mb-2">
@@ -529,14 +532,14 @@ export const Home = () => {
       </section>
 
       {/* Features */}
-      <section className="w-full bg-[#062F1D] py-16 px-6 md:px-12 lg:px-24 text-center">
+      <section className="w-full bg-[#062F1D] py-16 px-6 md:px-10  text-center">
         {/* Section Header Title */}
         <h2 className="text-white text-3xl md:text-[40px] font-bold mb-12 tracking-tight">
           Powerful Feature. Real Impact.
         </h2>
 
         {/* Grid container matches desktop full view and switches to vertical block stack on mobile */}
-        <div className=" mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className=" mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {features.map((feature) => (
             <div
               key={feature.id}
@@ -562,106 +565,112 @@ export const Home = () => {
       </section>
 
       {/* Market Review */}
-      <section className="w-full bg-white py-16 px-4 md:px-8 lg:px-16 overflow-hidden">
-        {/* Header Title */}
-        <div className="w-full text-center mb-12">
-          <h2 className="text-3xl md:text-[40px] font-bold text-[#1E293B]">
-            Live <span className="text-[#84CC16]">Marketplace</span> Review
-          </h2>
-        </div>
+    <section className="w-full bg-white py-16 px-6 md:px-8  overflow-hidden">
+  {/* Header Title */}
+  <div className="w-full text-center mb-12">
+    <h2 className="text-3xl md:text-[40px] font-bold text-[#1E293B]">
+      Live <span className="text-[#84CC16]">Marketplace</span> Review
+    </h2>
+  </div>
 
-        {/* Main Content Layout Split */}
-        <div className=" mx-auto grid grid-cols-1  lg:grid-cols-12 gap-8 items-center">
-          {/* Left Side: Bent Image Container */}
-          {/* Desktop: occupies 4 out of 12 columns. Mobile: centers and scales down slightly */}
-          <div className="lg:col-span-4 flex justify-center items-center py-6 order-2 lg:order-1">
-            <div className="relative w-75 h-95 sm:w-85 sm:h-105 bg-[#16A34A] rounded-2xl transform rotate-[-7deg] shadow-lg overflow-hidden transition-transform duration-300 hover:rotate-0">
-              {/* replace image here
-              <img src={YourHeroImage} alt="Marketplace highlight" className="w-full h-full object-cover transform rotate-[7deg] scale-110" />
-            */}
-              <div className="absolute inset-0 flex items-center justify-center text-white/40 font-medium tracking-wide transform rotate-[7deg]">
-                [ Image Container ]
+  {/* Main Content Layout Split */}
+  <div className="mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-center ">
+    
+    {/* Left Column (Laptop on Desktop, Bottom on Mobile) */}
+    <div className="lg:col-span-5 flex justify-center items-center py-6 lg:py-0 order-last lg:order-1 w-full mx-auto">
+      <div className="w-full flex items-center justify-center">
+        {/* Laptop Mockup Image - Visible on lg screens and up */}
+        <img
+          src={Mockup}
+          alt="mockup laptop view"
+          className="hidden lg:block w-full h-auto max-w-[850px] object-contain transform scale-105 xl:scale-115 origin-center"
+        />
+        {/* Mobile Image - Visible on mobile/tablet views */}
+        <img
+          src={Mobilemockup}
+          alt="mockup mobile view"
+          className="block lg:hidden w-full h-auto max-w-[320px] sm:max-w-90 object-contain"
+        />
+      </div>
+    </div>
+
+    {/* Right Column (Listings on Desktop, Top on Mobile) */}
+    <div className="lg:col-span-7 flex flex-col gap-6 order-1 lg:order-2 w-full overflow-hidden">
+      {/* Scrollable Listings Row */}
+      <div className="flex overflow-x-auto lg:grid lg:grid-cols-3 gap-6 pb-4 lg:pb-0 scrollbar-none snap-x snap-mandatory w-full">
+        {listings.map((item) => (
+          <div
+            key={item.id}
+            className="shrink-0 w-[75vw] sm:w-[45vw] lg:w-auto bg-white rounded-2xl border border-gray-100 p-3 snap-center shadow-sm"
+          >
+            {/* Product Image */}
+            <div className="w-full h-44 sm:h-48 rounded-xl overflow-hidden mb-4">
+              <img
+                src={item.image}
+                alt={item.title}
+                className="w-full h-full object-cover"
+              />
+            </div>
+
+            {/* Details Meta */}
+            <div className="px-1 text-left">
+              <h3 className="font-bold text-[#0F172A] text-sm sm:text-base mb-1 truncate">
+                {item.title}
+              </h3>
+
+              {/* Location Group with Pin Icon */}
+              <div className="flex items-center gap-1 text-[#94A3B8] text-xs mb-2">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="18"
+                  height="18"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                >
+                  <path
+                    d="M10.0003 9.58317C9.44779 9.58317 8.91789 9.36368 8.52719 8.97298C8.13649 8.58228 7.91699 8.05237 7.91699 7.49984C7.91699 6.9473 8.13649 6.4174 8.52719 6.0267C8.91789 5.636 9.44779 5.4165 10.0003 5.4165C10.5529 5.4165 11.0828 5.636 11.4735 6.0267C11.8642 6.4174 12.0837 6.9473 12.0837 7.49984C12.0837 7.77342 12.0298 8.04433 11.9251 8.29709C11.8204 8.54986 11.6669 8.77952 11.4735 8.97298C11.28 9.16643 11.0503 9.31989 10.7976 9.42459C10.5448 9.52928 10.2739 9.58317 10.0003 9.58317ZM10.0003 1.6665C8.45323 1.6665 6.9695 2.28109 5.87554 3.37505C4.78157 4.46901 4.16699 5.95274 4.16699 7.49984C4.16699 11.8748 10.0003 18.3332 10.0003 18.3332C10.0003 18.3332 15.8337 11.8748 15.8337 7.49984C15.8337 5.95274 15.2191 4.46901 14.1251 3.37505C13.0312 2.28109 11.5474 1.6665 10.0003 1.6665Z"
+                    fill="#0D2B1E"
+                    fillOpacity="0.6"
+                  />
+                </svg>
+                <span className="truncate">{item.location}</span>
+              </div>
+
+              {/* Price Tag Line */}
+              <div className="font-semibold text-sm text-[#84CC16]">
+                ₦{item.priceRange}
               </div>
             </div>
           </div>
+        ))}
+      </div>
 
-          {/* Right Side: Listings Container */}
-          
-          <div className="lg:col-span-8 flex flex-col gap-8 order-1 lg:order-2 w-full overflow-hidden">
-            {/* Scrollable Listings Row */}
-            <div className="flex overflow-x-auto lg:grid lg:grid-cols-3 gap-6 pb-4 lg:pb-0 scrollbar-none snap-x snap-mandatory w-full">
-              {listings.map((item) => (
-                <div
-                  key={item.id}
-                  className="shrink-0 w-[70vw] sm:w-[45vw] lg:w-auto bg-white rounded-2xl border border-gray-100 p-3 snap-center shadow-sm"
-                >
-                  {/* Product Image */}
-                  <div className="w-full h-44 sm:h-48 rounded-xl overflow-hidden mb-4">
-                    <img
-                      src={item.image}
-                      alt={item.title}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
+      {/* Browse All Listings Button */}
+      <div className="flex justify-end mt-2">
+        <button className="flex items-center justify-center gap-2 bg-[#16A34A] hover:bg-[#15803D] text-white font-medium py-3 px-6 rounded-xl transition-all duration-200 shadow-md hover:shadow-lg text-sm w-auto">
+          Browse all listings
+          <svg
+            className="w-4 h-4"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            strokeWidth="2.5"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M14 5l7 7m0 0l-7 7m7-7H3"
+            />
+          </svg>
+        </button>
+      </div>
+    </div>
 
-                  {/* Details Meta */}
-                  <div className="px-1 text-left">
-                    <h3 className="font-bold text-[#0F172A] text-base mb-1">
-                      {item.title}
-                    </h3>
-
-                    {/* Location Group with Pin Icon */}
-                    <div className="flex items-center gap-1 text-[#94A3B8] text-xs mb-2">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="20"
-                        height="20"
-                        viewBox="0 0 20 20"
-                        fill="none"
-                      >
-                        <path
-                          d="M10.0003 9.58317C9.44779 9.58317 8.91789 9.36368 8.52719 8.97298C8.13649 8.58228 7.91699 8.05237 7.91699 7.49984C7.91699 6.9473 8.13649 6.4174 8.52719 6.0267C8.91789 5.636 9.44779 5.4165 10.0003 5.4165C10.5529 5.4165 11.0828 5.636 11.4735 6.0267C11.8642 6.4174 12.0837 6.9473 12.0837 7.49984C12.0837 7.77342 12.0298 8.04433 11.9251 8.29709C11.8204 8.54986 11.6669 8.77952 11.4735 8.97298C11.28 9.16643 11.0503 9.31989 10.7976 9.42459C10.5448 9.52928 10.2739 9.58317 10.0003 9.58317ZM10.0003 1.6665C8.45323 1.6665 6.9695 2.28109 5.87554 3.37505C4.78157 4.46901 4.16699 5.95274 4.16699 7.49984C4.16699 11.8748 10.0003 18.3332 10.0003 18.3332C10.0003 18.3332 15.8337 11.8748 15.8337 7.49984C15.8337 5.95274 15.2191 4.46901 14.1251 3.37505C13.0312 2.28109 11.5474 1.6665 10.0003 1.6665Z"
-                          fill="#0D2B1E"
-                          fill-opacity="0.6"
-                        />
-                      </svg>
-                      <span>{item.location}</span>
-                    </div>
-
-                    {/* Price Tag Line */}
-                    <div className="font-semibold text-sm text-[#84CC16]">
-                      ₦{item.priceRange}
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            {/* Action Button: Aligned right on desktop, centered on mobile to look neat */}
-            <div className="flex justify-center lg:justify-end mt-2">
-              <button className="flex items-center justify-center gap-2 bg-[#16A34A] hover:bg-[#15803D] text-white font-medium py-3 px-6 rounded-xl transition-all duration-200 shadow-md hover:shadow-lg text-sm w-full sm:w-auto">
-                Browse all listings
-                <svg
-                  className="w-4 h-4"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth="2.5"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M14 5l7 7m0 0l-7 7m7-7H3"
-                  />
-                </svg>
-              </button>
-            </div>
-          </div>
-        </div>
-      </section>
+  </div>
+</section>
 
       {/* Testimonial */}
-     <section className="relative w-full py-20 px-4 md:px-12 lg:px-24 overflow-hidden min-h-150 flex items-center justify-center">
+     <section className="relative w-full py-20 px-6 md:px-12 lg:px-24 overflow-hidden min-h-150 flex items-center justify-center">
       {/* 1. FIXED BACKGROUND: Using an absolute div with true background opacity so it's muted, NOT shouty */}
       <div 
         className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-[0.15]" 
@@ -723,43 +732,45 @@ export const Home = () => {
 
       </div>
     </section>
+
+
     {/* last section */}
-    <section className="w-full bg-[#052316] py-16 px-6 md:px-16 lg:px-24 flex items-center justify-center overflow-hidden min-h-135 md:h-145.75">
-      <div className="max-w-5xl mx-auto w-full flex flex-col-reverse lg:flex-row items-center justify-between gap-10 lg:gap-16">
-        
-        {/* Left Side: Content Box (Appears underneath image on mobile) */}
-        <div className="flex-1 flex flex-col items-center lg:items-start text-center lg:text-left max-w-xl">
-          <h2 className="text-white text-3xl md:text-5xl font-bold leading-tight tracking-tight mb-3">
-            Ready to Turn <span className="text-[#84CC16]">Waste</span> <br className="hidden md:inline" />
-            Into Opportunity?
-          </h2>
-          
-          <p className="text-gray-300/90 text-md md:text-lg font-light mb-8 max-w-sm ">
-            Create your free account and start trading smarter today.
-          </p>
+    <section className="w-full bg-[#052316] pb-8 px-6 md:px-16 lg:px-24 flex items-center justify-center overflow-hidden min-h-135 md:h-145.75">
+  <div className="max-w-5xl mx-auto w-full flex flex-col-reverse md:flex-row items-center justify-between md:gap-10">
+    
+   
+    <div className="flex-1 flex flex-col items-start text-left max-w-xl  lg:mt-0">
+      <h2 className="text-white text-3xl md:text-5xl font-bold leading-tight tracking-tight mb-3">
+        Ready to Turn <span className="text-[#84CC16]">Waste</span> <br className="hidden md:inline" />
+        Into Opportunity?
+      </h2>
+      
+      <p className="text-gray-300/90 text-md md:text-lg font-light mb-8">
+        Create your free account and start trading smarter today.
+      </p>
 
-          {/* Action Call Buttons Container */}
-          <div className=" w-auto flex flex-col sm:flex-row gap-4 items-center justify-center lg:justify-start">
-            <button className="w-auto bg-[#16A34A] hover:bg-[#15803D] text-white text-sm font-medium py-3 px-6 rounded-xl transition-colors duration-200 shadow-md">
-              Sign Up as Seller
-            </button>
-            <button className="w-auto bg-transparent hover:bg-white/5 text-white text-sm font-medium py-3 px-6 rounded-xl border border-gray-500/60 transition-colors duration-200">
-              Sign Up as Buyer
-            </button>
-          </div>
-        </div>
-
-        {/* Right Side: Image Box (Appears on top on mobile view) */}
-        <div className="flex-1 flex justify-center items-center w-full max-w-[320px]  ">
-          <img 
-            src={Earth} 
-            alt="Eco ecosystem globe graphic" 
-            className="w-full max-h-100 md:max-h-175 object-contain animate-fade-in transition-transform duration-300 hover:scale-105"
-          />
-        </div>
-
+  
+      <div className="w-full flex flex-row gap-3 items-center justify-start">
+        <button className="flex-1 sm:flex-none bg-[#16A34A] hover:bg-[#15803D] text-white text-xs sm:text-sm font-medium py-3 px-4 sm:px-6 rounded-xl transition-colors duration-200 shadow-md whitespace-nowrap">
+          Sign Up as Seller
+        </button>
+        <button className="flex-1 sm:flex-none bg-transparent hover:bg-white/5 text-white text-xs sm:text-sm font-medium py-3 px-4 sm:px-6 rounded-xl border border-gray-500/60 transition-colors duration-200 whitespace-nowrap">
+          Sign Up as Buyer
+        </button>
       </div>
-    </section>
+    </div>
+
+    {/* Right Side: Image Box  */}
+    <div className="flex-1 flex justify-center items-center w-full md:max-w-[320px]">
+      <img 
+        src={Earth} 
+        alt="Eco ecosystem globe graphic" 
+        className="w-full max-h-100 md:max-h-175 object-contain animate-fade-in  transition-transform duration-300 hover:scale-105"
+      />
+    </div>
+
+  </div>
+</section>
     </div>
   );
 };
