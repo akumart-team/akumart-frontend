@@ -531,14 +531,14 @@ export const Home = () => {
       </section>
 
       {/* Features */}
-      <section className="w-full bg-[#062F1D] py-16 px-6 md:px-12 lg:px-24 text-center">
+      <section className="w-full bg-[#062F1D] py-16 px-6 md:px-10  text-center">
         {/* Section Header Title */}
         <h2 className="text-white text-3xl md:text-[40px] font-bold mb-12 tracking-tight">
           Powerful Feature. Real Impact.
         </h2>
 
         {/* Grid container matches desktop full view and switches to vertical block stack on mobile */}
-        <div className=" mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className=" mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {features.map((feature) => (
             <div
               key={feature.id}
@@ -564,7 +564,7 @@ export const Home = () => {
       </section>
 
       {/* Market Review */}
-    <section className="w-full bg-white py-16 px-6 md:px-8 lg:px-16 overflow-hidden">
+    <section className="w-full bg-white py-16 px-6 md:px-8  overflow-hidden">
   {/* Header Title */}
   <div className="w-full text-center mb-12">
     <h2 className="text-3xl md:text-[40px] font-bold text-[#1E293B]">
@@ -573,7 +573,7 @@ export const Home = () => {
   </div>
 
   {/* Main Content Layout Split */}
-  <div className="mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-center max-w-7xl">
+  <div className="mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-center ">
     
     {/* Left Column (Laptop on Desktop, Bottom on Mobile) */}
     <div className="lg:col-span-5 flex justify-center items-center py-6 lg:py-0 order-last lg:order-1 w-full mx-auto">
@@ -582,7 +582,7 @@ export const Home = () => {
         <img
           src={Mockup}
           alt="mockup laptop view"
-          className="hidden lg:block w-full h-auto max-w-137.5 xl:max-w-187.5 object-contain transform scale-105 xl:scale-115 origin-center"
+          className="hidden lg:block w-full h-auto max-w-[850px] object-contain transform scale-105 xl:scale-115 origin-center"
         />
         {/* Mobile Image - Visible on mobile/tablet views */}
         <img
@@ -735,7 +735,7 @@ export const Home = () => {
 
     {/* last section */}
     <section className="w-full bg-[#052316] pb-8 px-6 md:px-16 lg:px-24 flex items-center justify-center overflow-hidden min-h-135 md:h-145.75">
-  <div className="max-w-5xl mx-auto w-full flex flex-col-reverse lg:flex-row items-center justify-between md:gap-10">
+  <div className="max-w-5xl mx-auto w-full flex flex-col-reverse md:flex-row items-center justify-between md:gap-10">
     
    
     <div className="flex-1 flex flex-col items-start text-left max-w-xl  lg:mt-0">
