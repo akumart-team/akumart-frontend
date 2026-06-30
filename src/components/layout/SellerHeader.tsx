@@ -4,7 +4,7 @@ import { useLocation } from "react-router-dom";
 
 import HamburgerIcon from "./HamburgerIcon.tsx";
 
-interface BuyerHeaderProps {
+interface SellerHeaderProps {
   onMenuToggle: () => void;
 }
 interface PageInfo {
@@ -12,41 +12,41 @@ interface PageInfo {
   subtitle: string;
 }
 
-export default function BuyerHeader({ onMenuToggle }: BuyerHeaderProps) {
+export default function SellerHeader({ onMenuToggle }: SellerHeaderProps) {
   const location = useLocation();
 
   // Dynamic routing dictionary mapping URLs to Header Labels
   const getPageInfo = (path: string): PageInfo => {
-    if (path.includes("/buyer/dashboard"))
+    if (path.includes("/seller/dashboard"))
       return {
         title: "Dashboard",
         subtitle:
           "Get a quick overview of your listings, orders, sales, and earnings.",
       };
-    if (path.includes("/buyer/AIRecomendation"))
+    if (path.includes("/seller/analytics"))
       return {
-        title: "AI Recommendation",
+        title: "Analytics",
         subtitle:
-          "Discover materials tailored to your sourcing needs.",
+          "Track sales, orders, revenue, and listing performance in one place.",
       };
-   
-    if (path.includes("/buyer/orders"))
+    if (path.includes("/seller/for-you"))
       return {
-        title: "Orders",
+        title: "For You Page",
         subtitle:
-          "Get a quick overview of your listings, orders, sales, and earnings.",
+          "Personalized content & updates",
       };
-       if (path.includes("/buyer/checkout"))
+    if (path.includes("/seller/My-listings"))
       return {
-        title: "Check out ",
+        title: "my Listings",
         subtitle:
-          "Check out your listings, orders, sales, and earnings.",
+          "View all your listed materials here",
       };
-    if (path.includes("/buyer/settings"))
+       
+    if (path.includes("/seller/settings"))
       return {
         title: "Settings",
         subtitle:
-          "Get a quick overview of your listings, orders, sales, and earnings.",
+          "Manage your account, preferences, payments, and security settings.",
       };
 
     return {
@@ -98,7 +98,7 @@ export default function BuyerHeader({ onMenuToggle }: BuyerHeaderProps) {
             PG
           </div>
           <span className="text-xs font-bold text-[#495057] hidden sm:block">
-            AkuMart Waste Buyer
+            AkuMart Waste Seller
           </span>
         </div>
       </div>

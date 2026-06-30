@@ -1,4 +1,4 @@
-import React, { useState , useEffect,useRef} from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -6,7 +6,7 @@ import { z } from "zod";
 import toast from "react-hot-toast";
 import { CheckCircle } from "lucide-react";
 import AuthSideImg from "../assets/imgs/image.png";
-import Logo from "../assets/imgs/logo.png";
+import Logo from "../assets/icons/logo2.png";
 import { registerUser } from "../api/auth.api";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
@@ -24,7 +24,7 @@ const WASTE_CATEGORIES = [
   "Other",
 ];
 
-// ── Password must meet all criteria ──────────────────────────────────────────
+//  Password must meet all criteria 
 const passwordSchema = z
   .string()
   .min(8, "At least 8 characters")
@@ -60,7 +60,7 @@ const step3Schema = z.object({
 type Step2FormData = z.infer<typeof step2Schema>;
 type Step3FormData = z.infer<typeof step3Schema>;
 
-// ── Password strength indicator ───────────────────────────────────────────────
+//  Password strength indicator 
 const PasswordStrength = ({ password }: { password: string }) => {
   const checks = {
     length: password.length >= 8,
@@ -117,7 +117,7 @@ const PasswordStrength = ({ password }: { password: string }) => {
   );
 };
 
-// ── Success Modal ─────────────────────────────────────────────────────────────
+//  Success Modal 
 const SuccessModal = ({
   onNavigate,
 }: {
@@ -146,7 +146,7 @@ const SuccessModal = ({
   </div>
 );
 
-// ── Main Register Component ───────────────────────────────────────────────────
+//  Main Register Component 
 export const Register: React.FC = () => {
   const navigate = useNavigate();
   const [step, setStep] = useState<AuthStep>(1);
@@ -160,7 +160,6 @@ export const Register: React.FC = () => {
   const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
   const [roleDropdownOpen, setRoleDropdownOpen] = useState(false);
   const roleDropdownRef = useRef<HTMLDivElement>(null);
-
 
   const {
     register: registerStep2,
@@ -249,14 +248,17 @@ export const Register: React.FC = () => {
   };
 
   useEffect(() => {
-  const close = (e: MouseEvent) => {
-    if (roleDropdownRef.current && !roleDropdownRef.current.contains(e.target as Node)) {
-      setRoleDropdownOpen(false);
-    }
-  };
-  document.addEventListener('mousedown', close);
-  return () => document.removeEventListener('mousedown', close);
-}, []);
+    const close = (e: MouseEvent) => {
+      if (
+        roleDropdownRef.current &&
+        !roleDropdownRef.current.contains(e.target as Node)
+      ) {
+        setRoleDropdownOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", close);
+    return () => document.removeEventListener("mousedown", close);
+  }, []);
 
   return (
     <>
@@ -341,43 +343,57 @@ export const Register: React.FC = () => {
                   <label className="block text-xs font-semibold text-gray-500 mb-2 uppercase tracking-wider">
                     User Type
                   </label>
-                 <div className="relative w-full">
-{/* Replace your <select> with this */}
-<div ref={roleDropdownRef} className="relative w-full">
-  <button
-    type="button"
-    onClick={() => setRoleDropdownOpen((prev) => !prev)}
-    className={`w-full flex items-center justify-between gap-3 rounded-xl border-2 bg-white px-4 py-3.5 sm:py-3 text-left text-base sm:text-sm font-medium text-gray-900 transition-all duration-150 ${
-      roleDropdownOpen ? 'border-emerald-500 ring-4 ring-emerald-500/15' : 'border-gray-200 hover:border-emerald-300'
-    }`}
-  >
-    <span>{role === 'buyer' ? 'Buyer' : 'Seller'}</span>
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={`text-emerald-600 transition-transform duration-200 ${roleDropdownOpen ? 'rotate-180' : ''}`}>
-      <polyline points="6 9 12 15 18 9" />
-    </svg>
-  </button>
+                  <div className="relative w-full">
+                    {/* Replace your <select> with this */}
+                    <div ref={roleDropdownRef} className="relative w-full">
+                      <button
+                        type="button"
+                        onClick={() => setRoleDropdownOpen((prev) => !prev)}
+                        className={`w-full flex items-center justify-between gap-3 rounded-xl border-2 bg-white px-4 py-3.5 sm:py-3 text-left text-base sm:text-sm font-medium text-gray-900 transition-all duration-150 ${
+                          roleDropdownOpen
+                            ? "border-emerald-500 ring-4 ring-emerald-500/15"
+                            : "border-gray-200 hover:border-emerald-300"
+                        }`}
+                      >
+                        <span>{role === "buyer" ? "Buyer" : "Seller"}</span>
+                        <svg
+                          width="18"
+                          height="18"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          className={`text-emerald-600 transition-transform duration-200 ${roleDropdownOpen ? "rotate-180" : ""}`}
+                        >
+                          <polyline points="6 9 12 15 18 9" />
+                        </svg>
+                      </button>
 
-  {roleDropdownOpen && (
-    <div className="absolute left-0 right-0 top-full mt-2 z-20 bg-white border-2 border-emerald-100 rounded-xl shadow-lg overflow-hidden">
-      {(['buyer', 'seller'] as UserRole[]).map((opt) => (
-        <button
-          key={opt}
-          type="button"
-          onClick={() => { setRole(opt); setRoleDropdownOpen(false); }}
-          className={`w-full text-left px-4 py-3 text-base sm:text-sm font-medium transition-colors duration-150 ${
-            role === opt ? 'bg-[#16A34A] text-white' : 'text-gray-900 '
-          }`}
-        >
-          {opt === 'buyer' ? 'Buyer' : 'Seller'}
-        </button>
-      ))}
-    </div>
-  )}
-</div>
-
-  {/* Custom chevron — replaces the native arrow, which looks different on every platform */}
-  
-</div>
+                      {roleDropdownOpen && (
+                        <div className="absolute left-0 right-0 top-full mt-2 z-20 bg-white border-2 border-emerald-100 rounded-xl shadow-lg overflow-hidden">
+                          {(["buyer", "seller"] as UserRole[]).map((opt) => (
+                            <button
+                              key={opt}
+                              type="button"
+                              onClick={() => {
+                                setRole(opt);
+                                setRoleDropdownOpen(false);
+                              }}
+                              className={`w-full text-left px-4 py-3 text-base sm:text-sm font-medium transition-colors duration-150 ${
+                                role === opt
+                                  ? "bg-[#16A34A] text-white"
+                                  : "text-gray-900 "
+                              }`}
+                            >
+                              {opt === "buyer" ? "Buyer" : "Seller"}
+                            </button>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  </div>
                 </div>
                 <button
                   type="submit"
@@ -441,11 +457,11 @@ export const Register: React.FC = () => {
 
                 {/* OR Divider */}
                 <div className="flex items-center my-4">
-                  <div className="flex-grow border-t border-gray-100"></div>
+                  <div className="grow border-t border-gray-100"></div>
                   <span className="px-3 text-xs text-gray-300 font-medium">
                     OR
                   </span>
-                  <div className="flex-grow border-t border-gray-100"></div>
+                  <div className="grow border-t border-gray-100"></div>
                 </div>
 
                 <div className="w-full bg-[#F8FAFC] p-1 rounded-lg flex mb-6">
@@ -698,7 +714,7 @@ export const Register: React.FC = () => {
                             }`}
                           >
                             <span
-                              className={`w-3.5 h-3.5 rounded border flex items-center justify-center flex-shrink-0 ${
+                              className={`w-3.5 h-3.5 rounded border flex items-center justify-center shrink-0 ${
                                 selectedCategories.includes(cat)
                                   ? "bg-emerald-500 border-emerald-500"
                                   : "border-gray-300"

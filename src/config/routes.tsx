@@ -11,14 +11,18 @@ import {
   SellerDashboard,
   Orders,
   AIRecommendation,
-  
   Settings,
   OrderPayment,
+  Analytics,
+  ForYou,
+  MyListings,
+  SellerSettings,
 } from "../pages";
 import { ScrollToTop } from "../components/layout/ScrollToTop";
 import { Header } from "../components/layout/Header";
 import { Footer } from "../components/layout/Footer";
 import BuyerLayout from "../components/layout/BuyerLayout";
+import SellerLayout from "../components/layout/SellerLayout";
 
 import { useAuthStore } from "../store";
 
@@ -88,15 +92,26 @@ export function Routes() {
     // Seller dashboard — protected, seller only
     {
       path: "/seller",
-      element: <ProtectedRoute allowedRole="seller" />,
-      children: [{ path: "dashboard", element: <SellerDashboard /> }],
+      // element: <ProtectedRoute allowedRole="seller" />,
+      children: [
+        {
+          element: <SellerLayout />,
+          children: [
+            { path: "dashboard", element: <SellerDashboard /> },
+            { path: "analytics", element: <Analytics /> },
+            { path: "for-you", element: <ForYou /> },
+            { path: "My-listings", element: <MyListings /> },
+            { path: "settings", element: <SellerSettings /> },
+          ],
+        },
+      ],
     },
 
     // Buyer dashboard — protected, buyer only
 
     {
       path: "/buyer",
-      // element: <ProtectedRoute allowedRole="buyer" />,
+      element: <ProtectedRoute allowedRole="buyer" />,
       children: [
         {
           element: <BuyerLayout />,
@@ -105,8 +120,8 @@ export function Routes() {
             { path: "orders", element: <Orders /> },
             { path: "settings", element: <Settings /> },
             { path: "AIRecomendation", element: <AIRecommendation /> },
-         
-            { path: "checkout", element: <OrderPayment /> }
+
+            { path: "checkout", element: <OrderPayment /> },
           ],
         },
       ],

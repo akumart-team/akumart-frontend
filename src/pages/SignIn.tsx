@@ -5,7 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import toast from "react-hot-toast";
 import AuthSideImg from "../assets/imgs/image.png";
-import Logo from "../assets/imgs/logo.png";
+import Logo from "../assets/icons/logo2.png";
 import { loginUser } from "../api/auth.api";
 import { useAuthStore } from "../store";
 
