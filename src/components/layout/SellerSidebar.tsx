@@ -3,27 +3,28 @@ import { NavLink,  } from "react-router-dom";
 
 import Dashboard from "../../assets/icons/dashboard.png"
 import Settings from "../../assets/icons/settings.png"
-import Cart from "../../assets/icons/cart.png"
+import Analytics from "../../assets/icons/analytics.png"
 
-import Ai from "../../assets/icons/ai.png"
+import ForYou from "../../assets/icons/forYou.png"
+import Listing from "../../assets/icons/listing.png"
 import Logo from "../../assets/imgs/logo.png"
 
-interface BuyerSidebarProps {
+interface SellerSidebarProps {
   onClose: () => void;
 }
 
-export default function BuyerSidebar({ onClose }: BuyerSidebarProps) {
+export default function BuyerSidebar({ onClose }: SellerSidebarProps) {
  
 
   const navigationItems = [
     { name: "Dashboard", 
-    path: "/buyer/dashboard", 
+    path: "/seller/dashboard", 
     icon: Dashboard },
-    { name: "AI Recommendations", path: "/buyer/AIRecomendation", icon: Ai },
+    { name: "My Listings", path: "/seller/My-listings", icon: Listing },
     
-    { name: "Orders", path: "/buyer/orders", icon: Cart },
-    { name: "Order Checkout", path: "/buyer/checkout", icon: Cart },
-    { name: "Settings", path: "/buyer/settings", icon: Settings },
+    { name: "Analytics", path: "/seller/analytics", icon: Analytics },
+    { name: "For You", path: "/seller/for-You", icon: ForYou},
+    { name: "Settings", path: "/seller/settings", icon: Settings },
   ];
 
   return (
@@ -46,7 +47,7 @@ export default function BuyerSidebar({ onClose }: BuyerSidebarProps) {
               to={item.path}
               onClick={onClose}
               className={({ isActive }) => `
-                flex items-center gap-3 px-4 py-5  text-sm font-medium tracking-wide transition-all duration-200
+                flex items-center gap-3 px-4 py-3 text-sm font-medium tracking-wide transition-all duration-200
                 ${isActive 
                   ? "bg-[#16A34A] text-white shadow-sm" 
                   : "text-[#111827]  hover:bg-[#F8F9FA] hover:text-[#818181]"
@@ -85,7 +86,7 @@ export default function BuyerSidebar({ onClose }: BuyerSidebarProps) {
           </div>
         </div>
         
-        <button className="w-full flex items-center justify-center gap-2 px-4 py-2.5 border  rounded-xl bg-[#16A34A]  text-sm font-bold text-white hover:bg-[#FFF5F5] transition-colors">
+        <button className="w-full flex items-center justify-center gap-2 px-4 py-2.5 border bg-[#16A34A]  rounded-xl text-sm font-bold text-white  transition-colors">
           <span></span> Logout
         </button>
       </div>
